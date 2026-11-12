@@ -1,0 +1,24 @@
+Marco Cassarino
+Feltre, Italy
+marco.a@a.it
++39 XXX XXXXXXX
+
+28 October 2026
+
+Hiring Manager
+Tech Innovations Ltd.
+London, United Kingdom
+
+Dear Hiring Manager,
+
+I am writing to express my strong interest in the Junior Software Developer position recently advertised on your company portal. As a first-year Computer Science Engineering student at eCampus University, I am eager to apply my technical skills and passion for software development to a dynamic team.
+
+Throughout my academic and self-directed path, I have prioritized practical implementation alongside theory. I have independently developed and deployed projects such as Lemmly (including the official Lemmly website) and Neuma. Through these initiatives, I gained hands-on experience in full-cycle development, UI/UX optimization, and writing clean, maintainable code to solve real-world problems.
+
+I am particularly impressed by your company's innovative technological projects and collaborative work culture. I am confident that my technical mindset, proven project experience, and eagerness to learn will make a tangible contribution to your team.
+
+Thank you for your time and consideration. I would welcome the opportunity to discuss my background and projects in greater detail during an interview.
+
+Yours faithfully,
+
+Marco Cassarino

@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Microsoft Office temporary lock files
+~$*
+**/~$*
+*.tmp
+
+# Python / caches
+__pycache__/
+*.pyc
+.venv/

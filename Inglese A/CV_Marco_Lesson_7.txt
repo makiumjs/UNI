@@ -1,0 +1,29 @@
+CURRICULUM VITAE
+
+PERSONAL DETAILS
+Name: Marco Cassarino
+Address: [City], Italy
+Email: marco.student@email.com
+Phone: +39 [Phone Number]
+
+PERSONAL PROFILE
+First-year Computer Science Engineering student at eCampus University. Motivated and proactive, with practical skills in software and web development. Passionate about solving technical problems and learning modern technologies.
+
+EDUCATION
+2025 – Present: Bachelor's Degree in Computer Science Engineering
+eCampus University, Italy
+
+2020 – 2025: High School Diploma (Scientific/Technical)
+High School [Name], Italy
+
+TECHNICAL & DIGITAL SKILLS
+• Programming: JavaScript, Python, HTML/CSS, SQL
+• Tools: Git, GitHub, VS Code
+• Personal Projects: Development of web platforms and software tools (Lemmly, Neuma)
+
+LANGUAGES
+• Italian: Native
+• English: Intermediate (B1)
+
+INTERESTS
+Technology, coding, robotics, and sports.

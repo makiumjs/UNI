@@ -1,0 +1,69 @@
+Good morning, ladies and gentlemen.
+
+First of all, thank you all for being here today. It is a pleasure to welcome our business partners to this presentation.
+
+For those of you who don't know me, my name is Marco Cassarino. I am a software engineer specializing in cybersecurity, and I am the lead developer and project manager responsible for our digital innovation initiatives, particularly two core products: **Lemmly** and **Neuma**.
+
+Today, I would like to give you an overview of our company's technical portfolio, our latest software developments, and how our solutions can create value for our business partners.
+
+In today's rapidly evolving digital world, businesses need reliable, high-performance web applications and strong cybersecurity systems. These solutions must be able to grow and adapt without compromising data privacy or security.
+
+My presentation will be divided into three main parts.
+
+First, I'll introduce **Lemmly**, our main web platform and customer-facing infrastructure.
+
+Then, I'll move on to **Neuma**, an advanced engineering project designed to address complex data management and cybersecurity challenges.
+
+Finally, I'll discuss our future plans for collaboration and how we can achieve mutual growth.
+
+My presentation will take approximately four to five minutes. I've included the key metrics and architecture diagrams in the handout, so please feel free to take a copy. There will be time for questions at the end.
+
+
+
+So, let's start with Lemmly.
+
+Lemmly was developed with a clear objective: to create a clean, responsive, and user-friendly web application supported by a solid and modern architecture.
+
+As lead developer, I was responsible for designing the overall user experience, as well as developing the official website and customer platform.
+
+We focused particularly on performance optimization, responsive design, and low latency.
+
+According to our latest performance metrics, the platform delivers fast loading times and a smooth user experience.
+
+For our business partners, this means having a reliable digital platform that helps attract customers, improve conversion rates, and make the onboarding process easier.
+
+
+Now, let's move on to my second project: Neuma.
+
+While Lemmly focuses on user experience and web presence, Neuma was designed to address more complex engineering and cybersecurity challenges.
+
+In this project, we implemented robust architectural methodologies, data protection protocols, and reliable backend systems.
+
+As an engineer specializing in cybersecurity, one of my main priorities was to ensure that sensitive information remains protected against modern security threats, while maintaining high system performance.
+
+We also integrated automated testing and modular components.
+
+This makes Neuma a reliable and scalable foundation that our business partners can integrate into their existing workflows with confidence.
+
+
+
+Let's now move on to our final topic: **future opportunities for collaboration**.
+
+We believe that combining our technical expertise with your market knowledge can create valuable business opportunities.
+
+We are currently expanding our cloud integrations and planning new multi-platform features that could open up additional revenue streams.
+
+Based on the results and feedback we have received so far, I am confident that working together can provide significant competitive advantages for both sides.
+
+
+Well, this brings me to the end of my presentation.
+
+Let me briefly summarize the main points.
+
+Today, we looked at **Lemmly**, our user-friendly digital platform; we explored **Neuma**, our secure and scalable backend infrastructure; and finally, we discussed the potential benefits of future collaboration.
+
+Our goal is to transform complex technical challenges into simple, reliable, and secure business solutions.
+
+Thank you very much for your time and attention.
+
+I would now be happy to answer any questions you may have.

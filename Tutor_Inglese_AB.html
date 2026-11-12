@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutor Esame — Lingua Inglese A &amp; B</title>
+<style>
+  :root {
+    --bg: #F7F6F3;
+    --surface: #FFFFFF;
+    --surface-muted: #F9F9F8;
+    --border: #EAEAEA;
+    --border-strong: #D4D4D0;
+    --ink: #18181B;
+    --ink-muted: #6B6B68;
+    --accent: #111111;
+    --accent-hover: #333333;
+    --blue-bg: #E1F3FE;
+    --blue-fg: #1F6C9F;
+    --green-bg: #EDF3EC;
+    --green-fg: #27582B;
+    --green-bd: #B9D8BC;
+    --red-bg: #FDEBEC;
+    --red-fg: #9F2F2D;
+    --red-bd: #F3C4C6;
+    --yellow-bg: #FBF3DB;
+    --yellow-fg: #8A5A00;
+    --sans: 'SF Pro Display', 'Helvetica Neue', -apple-system, BlinkMacSystemFont, sans-serif;
+    --serif: 'New York', 'Lyon Text', Georgia, serif;
+    --mono: 'SF Mono', 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 28px 20px 64px;
+  }
+
+  /* Header */
+  .topbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+
+  .brand h1 {
+    font-family: var(--serif);
+    font-size: 28px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin: 0 0 6px 0;
+    font-weight: 600;
+  }
+
+  .meta {
+    font-size: 13px;
+    color: var(--ink-muted);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .pill-blue { background: var(--blue-bg); color: var(--blue-fg); }
+  .pill-yellow { background: var(--yellow-bg); color: var(--yellow-fg); }
+  .pill-green { background: var(--green-bg); color: var(--green-fg); }
+  .pill-red { background: var(--red-bg); color: var(--red-fg); }
+
+  /* Course Switcher */
+  .course-switch {
+    display: inline-flex;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 4px;
+    gap: 4px;
+  }
+  .course-btn {
+    min-height: 44px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--ink-muted);
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 150ms ease, color 150ms ease;
+  }
+  .course-btn[aria-pressed="true"] {
+    background: var(--accent);
+    color: #FFFFFF;
+  }
+  .course-btn:focus-visible, button:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--blue-fg);
+    outline-offset: 2px;
+  }
+
+  /* Stats Strip */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-family: var(--mono);
+  }
+  .stat-val {
+    font-size: 22px;
+    font-weight: 700;
+    margin-top: 4px;
+    letter-spacing: -0.02em;
+  }
+
+  /* Mode Nav */
+  .nav-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .tab-btn {
+    min-height: 44px;
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: border-color 150ms ease, background 150ms ease;
+  }
+  .tab-btn:hover { border-color: var(--border-strong); }
+  .tab-btn[aria-selected="true"] {
+    background: var(--accent);
+    color: #FFFFFF;
+    border-color: var(--accent);
+  }
+
+  /* Main Panel */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 16px;
+  }
+
+  .controls-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .control-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+  }
+
+  select, .btn-secondary, .btn-primary {
+    min-height: 44px;
+    font-family: var(--sans);
+    font-size: 14px;
+    border-radius: 6px;
+  }
+
+  select {
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--ink);
+    padding: 6px 12px;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #FFFFFF;
+    border: 1px solid var(--accent);
+    padding: 8px 18px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 150ms ease, transform 120ms ease;
+  }
+  .btn-primary:hover { background: var(--accent-hover); }
+  .btn-primary:active { transform: scale(0.98); }
+
+  .btn-secondary {
+    background: var(--surface);
+    color: var(--ink);
+    border: 1px solid var(--border-strong);
+    padding: 8px 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 150ms ease, transform 120ms ease;
+  }
+  .btn-secondary:hover { background: var(--surface-muted); }
+  .btn-secondary:active { transform: scale(0.98); }
+  .btn-secondary[aria-pressed="true"] {
+    background: var(--yellow-bg);
+    color: var(--yellow-fg);
+    border-color: #E2C572;
+  }
+
+  /* Progress Bar */
+  .progress-track {
+    width: 100%;
+    height: 6px;
+    background: var(--border);
+    border-radius: 9999px;
+    overflow: hidden;
+    margin-bottom: 18px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    transition: width 220ms ease;
+  }
+
+  /* Question UI */
+  .q-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .q-tag {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-muted);
+  }
+  .q-stem {
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 1.45;
+    margin: 0 0 18px 0;
+    color: var(--ink);
+  }
+
+  .options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .opt-btn {
+    min-height: 48px;
+    width: 100%;
+    text-align: left;
+    padding: 12px 14px;
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15.5px;
+    line-height: 1.4;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: border-color 140ms ease, background 140ms ease;
+  }
+  .opt-btn:hover:not(:disabled) {
+    border-color: var(--ink);
+    background: var(--surface-muted);
+  }
+  .opt-btn:disabled { cursor: default; }
+  .opt-btn.selected {
+    border-color: var(--blue-fg);
+    background: var(--blue-bg);
+    color: #0F3D5E;
+    font-weight: 600;
+  }
+  .opt-btn.correct {
+    border-color: var(--green-bd);
+    background: var(--green-bg);
+    color: var(--green-fg);
+    font-weight: 600;
+  }
+  .opt-btn.wrong {
+    border-color: var(--red-bd);
+    background: var(--red-bg);
+    color: var(--red-fg);
+  }
+
+  kbd {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    height: 24px;
+    padding: 0 6px;
+    border: 1px solid var(--border-strong);
+    border-radius: 4px;
+    background: var(--bg);
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-muted);
+    flex-shrink: 0;
+  }
+
+  .feedback-box {
+    margin-top: 16px;
+    padding: 14px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface-muted);
+    font-size: 14.5px;
+  }
+  .feedback-box.ok { border-color: var(--green-bd); background: var(--green-bg); color: var(--green-fg); }
+  .feedback-box.ko { border-color: var(--red-bd); background: var(--red-bg); color: var(--red-fg); }
+
+  .action-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* Exam Grid */
+  .exam-nav-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+  .num-chip {
+    min-width: 38px;
+    height: 36px;
+    padding: 0 8px;
+    border: 1px solid var(--border-strong);
+    border-radius: 6px;
+    background: var(--surface);
+    font-family: var(--mono);
+    font-size: 12px;
+    cursor: pointer;
+    color: var(--ink);
+  }
+  .num-chip.answered { background: var(--blue-bg); border-color: #93C5FD; color: var(--blue-fg); font-weight: 700; }
+  .num-chip.active { outline: 2px solid var(--accent); font-weight: 700; }
+  .num-chip.ok { background: var(--green-bg); border-color: var(--green-bd); color: var(--green-fg); }
+  .num-chip.ko { background: var(--red-bg); border-color: var(--red-bd); color: var(--red-fg); }
+
+  textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 12px 14px;
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.5;
+    resize: vertical;
+    color: var(--ink);
+    background: var(--surface);
+  }
+
+  /* Open Questions Accordion / Cards */
+  .open-item {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    padding: 18px 20px;
+    margin-bottom: 12px;
+  }
+  .open-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .open-prompt {
+    font-weight: 600;
+    font-size: 16px;
+    white-space: pre-line;
+    margin-bottom: 10px;
+  }
+  .model-box {
+    margin-top: 12px;
+    padding: 14px 16px;
+    border-left: 3px solid var(--blue-fg);
+    background: var(--surface-muted);
+    border-radius: 0 8px 8px 0;
+    white-space: pre-line;
+    font-size: 15px;
+  }
+  .kw-bar {
+    margin-top: 8px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--blue-fg);
+  }
+
+  .shortcut-hint {
+    font-size: 12px;
+    color: var(--ink-muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .hidden { display: none !important; }
+
+  @media (max-width: 640px) {
+    .card { padding: 18px 16px; }
+    .q-stem { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="topbar">
+    <div class="brand">
+      <h1>Lingua Inglese A &amp; B — Exam Tutor</h1>
+      <div class="meta">
+        <span>Marco Cassarino · 001955233</span>
+        <span class="pill pill-yellow" id="countdown-pill">Esame 01/12/2026</span>
+      </div>
+    </div>
+    <div class="course-switch" role="group" aria-label="Seleziona corso">
+      <button class="course-btn" id="btn-course-A" aria-pressed="true" onclick="switchCourse('A')">Inglese A · DM 1648/23</button>
+      <button class="course-btn" id="btn-course-B" aria-pressed="false" onclick="switchCourse('B')">Inglese B · Dindelli</button>
+    </div>
+  </header>
+
+  <section class="stats-grid" aria-label="Riepilogo progresso">
+    <div class="stat-card">
+      <div class="stat-label">Banca Chiuse</div>
+      <div class="stat-val" id="stat-bank">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Completate</div>
+      <div class="stat-val" id="stat-done">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Accuratezza</div>
+      <div class="stat-val" id="stat-acc">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Da Ripassare</div>
+      <div class="stat-val" id="stat-review">0</div>
+    </div>
+  </section>
+
+  <nav class="nav-tabs" role="tablist" aria-label="Modalità di studio">
+    <button class="tab-btn" id="tab-drill" role="tab" aria-selected="true" onclick="switchMode('drill')">Ripasso Chiuse</button>
+    <button class="tab-btn" id="tab-exam" role="tab" aria-selected="false" onclick="switchMode('exam')">Simulazione Esame</button>
+    <button class="tab-btn" id="tab-open" role="tab" aria-selected="false" onclick="switchMode('open')">Aperte &amp; Orale (24)</button>
+    <button class="tab-btn" id="tab-review" role="tab" aria-selected="false" onclick="switchMode('review')">Errori &amp; Salvate</button>
+  </nav>
+
+  <!-- MODE 1: DRILL -->
+  <main id="panel-drill" class="card">
+    <div class="controls-row">
+      <div class="control-group">
+        <label for="filter-lesson" style="font-size:13px;font-weight:600;color:var(--ink-muted);">Lezione:</label>
+        <select id="filter-lesson" onchange="applyDrillFilter()"></select>
+        <button class="btn-secondary" id="btn-shuffle" aria-pressed="false" onclick="toggleShuffle()">Mescola</button>
+      </div>
+      <div class="control-group">
+        <span class="q-tag" id="drill-counter">1 / 75</span>
+        <button class="btn-secondary" id="btn-bookmark" aria-pressed="false" onclick="toggleBookmarkCurrent()">Salva</button>
+      </div>
+    </div>
+
+    <div class="progress-track"><div class="progress-fill" id="drill-progress"></div></div>
+
+    <div id="drill-body">
+      <div class="q-meta">
+        <span class="pill pill-blue" id="drill-tag">Lezione 002</span>
+      </div>
+      <h2 class="q-stem" id="drill-stem"></h2>
+      <div class="options-list" id="drill-options"></div>
+      <div id="drill-feedback" class="feedback-box hidden"></div>
+    </div>
+
+    <div class="action-footer">
+      <div class="shortcut-hint">
+        <span><kbd>1</kbd>-<kbd>4</kbd> Scegli</span>
+        <span><kbd>Enter</kbd> Prossima</span>
+        <span><kbd>B</kbd> Salva</span>
+      </div>
+      <div class="control-group">
+        <button class="btn-secondary" onclick="prevDrill()">Precedente</button>
+        <button class="btn-primary" onclick="nextDrill()">Prossima</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- MODE 2: EXAM SIMULATION -->
+  <section id="panel-exam" class="card hidden">
+    <div id="exam-intro">
+      <h2 style="font-family:var(--serif);margin:0 0 8px 0;">Simulazione Esame Reale</h2>
+      <p id="exam-desc" style="color:var(--ink-muted);margin:0 0 18px 0;"></p>
+      <button class="btn-primary" onclick="startExam()">Avvia Simulazione (40:00)</button>
+    </div>
+
+    <div id="exam-active" class="hidden">
+      <div class="controls-row">
+        <div class="control-group">
+          <span class="pill pill-blue" id="exam-badge">Simulazione</span>
+          <span class="pill pill-yellow" id="exam-timer">40:00</span>
+          <button class="btn-secondary" id="btn-pause-timer" onclick="toggleTimer()">Pausa</button>
+        </div>
+        <button class="btn-primary" onclick="submitExam()">Consegna Prova</button>
+      </div>
+
+      <div class="exam-nav-grid" id="exam-nav"></div>
+      <div id="exam-stage"></div>
+
+      <div class="action-footer">
+        <button class="btn-secondary" onclick="examStep(-1)">Precedente</button>
+        <button class="btn-primary" onclick="examStep(1)">Successiva</button>
+      </div>
+    </div>
+
+    <div id="exam-results" class="hidden"></div>
+  </section>
+
+  <!-- MODE 3: OPEN QUESTIONS & ORAL -->
+  <section id="panel-open" class="hidden">
+    <div class="card" style="padding:16px 20px;margin-bottom:14px;">
+      <div class="controls-row" style="margin:0;padding:0;border:none;">
+        <div class="control-group">
+          <label for="filter-open-mod" style="font-size:13px;font-weight:600;color:var(--ink-muted);">Filtro:</label>
+          <select id="filter-open-mod" onchange="renderOpenList()"></select>
+        </div>
+        <div class="control-group">
+          <button class="btn-secondary" onclick="toggleAllModels(true)">Mostra tutti i modelli</button>
+          <button class="btn-secondary" onclick="toggleAllModels(false)">Nascondi modelli</button>
+        </div>
+      </div>
+    </div>
+    <div id="open-list"></div>
+  </section>
+
+  <!-- MODE 4: REVIEW & SYNC -->
+  <section id="panel-review" class="card hidden">
+    <div class="controls-row">
+      <div>
+        <h2 style="font-family:var(--serif);margin:0 0 4px 0;font-size:20px;">Errori &amp; Domande Salvate</h2>
+        <p style="margin:0;font-size:13.5px;color:var(--ink-muted);">Raccoglie automaticamente gli errori e le domande segnate con <kbd>B</kbd>.</p>
+      </div>
+      <div class="control-group">
+        <button class="btn-secondary" onclick="exportProgress()">Esporta JSON</button>
+        <button class="btn-secondary" onclick="document.getElementById('import-file').click()">Importa JSON</button>
+        <input type="file" id="import-file" accept=".json" class="hidden" onchange="importProgress(event)">
+        <button class="btn-secondary" onclick="resetCourseStats()">Azzera Corso</button>
+      </div>
+    </div>
+    <div id="review-list"></div>
+  </section>
+</div>
+
+<script>
+const DB = {"A": {"name": "Lingua Inglese A (DM 1648/23)", "examSize": 24, "examMax": 30, "closed": [{"id": "A-L002-01", "tag": "Lezione 002 · Q01", "lesson": "Lezione 002", "stem": "An ISP gives you direct _________ to the Internet.", "options": ["access", "exept", "excess", "assess"], "answer": "access", "explanation": "'Access to the Internet' = accesso a Internet."}, {"id": "A-L002-02", "tag": "Lezione 002 · Q02", "lesson": "Lezione 002", "stem": "When you have finished your online purchase, go to the _________ page and pay for your items.", "options": ["checkout", "chequing", "check in", "checking"], "answer": "checkout", "explanation": "Negli acquisti online la pagina di pagamento finale si chiama 'checkout'."}, {"id": "A-L002-03", "tag": "Lezione 002 · Q03", "lesson": "Lezione 002", "stem": "Use the _________ feature to hide the recipients' email address.", "options": ["CC", "BCC", "CCB", "BBC"], "answer": "BCC", "explanation": "BCC (Blind Carbon Copy / Ccn) nasconde gli indirizzi email dei destinatari."}, {"id": "A-L002-04", "tag": "Lezione 002 · Q04", "lesson": "Lezione 002", "stem": "When you ________ an email, you send a copy of a message to a different email address.", "options": ["save", "proofread", "delete", "forward"], "answer": "forward", "explanation": "'Forward an email' = inoltrare un'email a un altro indirizzo."}, {"id": "A-L002-05", "tag": "Lezione 002 · Q05", "lesson": "Lezione 002", "stem": "An email ___________ is a file sent along with the message.", "options": ["attached", "attachment", "attach", "attaching"], "answer": "attachment", "explanation": "Serve il sostantivo 'attachment' (allegato), preceduto da 'an'."}, {"id": "A-L002-06", "tag": "Lezione 002 · Q06", "lesson": "Lezione 002", "stem": "A ___________ is a computer or software system that provides data, resources, or services to other computers.", "options": ["browser", "search engine", "cloud", "server"], "answer": "server", "explanation": "Un 'server' fornisce dati, risorse o servizi ad altri computer in rete."}, {"id": "A-L002-07", "tag": "Lezione 002 · Q07", "lesson": "Lezione 002", "stem": "You need to enter your username and your password to _______ to this site.", "options": ["log in", "log on", "log out", "log off"], "answer": "log in", "explanation": "'Log in (to a site)' = accedere inserendo username e password."}, {"id": "A-L003-01", "tag": "Lezione 003 · Q01", "lesson": "Lezione 003", "stem": "A USB flash drive is a(n) __________ .", "options": ["internal hardware part", "storage device", "output device", "input device"], "answer": "storage device", "explanation": "La chiavetta USB è un dispositivo di archiviazione dati ('storage device')."}, {"id": "A-L003-02", "tag": "Lezione 003 · Q02", "lesson": "Lezione 003", "stem": "The digital application that organizes, calculates, and analyses data in rows and columns is called a __________ .", "options": ["database", "spreadsheet", "display", "word processing"], "answer": "spreadsheet", "explanation": "Il foglio di calcolo che organizza dati in righe e colonne si chiama 'spreadsheet'."}, {"id": "A-L003-03", "tag": "Lezione 003 · Q03", "lesson": "Lezione 003", "stem": "A __________ is the temporary, high-speed memory used to run open applications and tasks.", "options": ["Hard Disk Drive (HDD)", "Central Processing Unit (CPU)", "Random Access Memory (RAM)", "Solid-State Drive (SSD)"], "answer": "Random Access Memory (RAM)", "explanation": "La RAM è la memoria veloce temporanea usata per programmi e task aperti."}, {"id": "A-L003-04", "tag": "Lezione 003 · Q04", "lesson": "Lezione 003", "stem": "A ___________ can damage data or disrupt system performance.", "options": ["virus", "cursor", "database", "motherboard"], "answer": "virus", "explanation": "Un 'virus' informatico può danneggiare dati o rallentare/bloccare il sistema."}, {"id": "A-L004-01", "tag": "Lezione 004 · Q01", "lesson": "Lezione 004", "stem": "Is this tablet _____?", "options": ["their", "our", "yours", "my"], "answer": "yours", "explanation": "Pronome possessivo senza sostantivo seguente ('Is this tablet yours?')."}, {"id": "A-L004-02", "tag": "Lezione 004 · Q02", "lesson": "Lezione 004", "stem": "We built this house all by __________.", "options": ["ourself", "us", "ourselves", "ours"], "answer": "ourselves", "explanation": "Pronome riflessivo/enfatico 1ª persona plurale: 'all by ourselves' ('ourself' non esiste)."}, {"id": "A-L004-03", "tag": "Lezione 004 · Q03", "lesson": "Lezione 004", "stem": "It is ____ bicycle, not yours.", "options": ["theirs", "mine", "his", "hers"], "answer": "his", "explanation": "Serve l'aggettivo possessivo davanti al sostantivo 'bicycle': 'his'."}, {"id": "A-L004-04", "tag": "Lezione 004 · Q04", "lesson": "Lezione 004", "stem": "The children hurt ________ while playing.", "options": ["herself", "himself", "themself", "themselves"], "answer": "themselves", "explanation": "Riflessivo 3ª persona plurale per 'the children' = 'themselves'."}, {"id": "A-L004-05", "tag": "Lezione 004 · Q05", "lesson": "Lezione 004", "stem": "Do you like ___ coffee?", "options": ["an", "---", "a", "the"], "answer": "---", "explanation": "'Coffee' non numerabile usato in senso generale: zero article ('---')."}, {"id": "A-L004-06", "tag": "Lezione 004 · Q06", "lesson": "Lezione 004", "stem": "___ owner of this house is very rich.", "options": ["An", "---", "The", "A"], "answer": "The", "explanation": "'Owner' è specificato da 'of this house' -> articolo determinativo 'The'."}, {"id": "A-L004-07", "tag": "Lezione 004 · Q07", "lesson": "Lezione 004", "stem": "I am reading _____ interesting book.", "options": ["a", "---", "an", "the"], "answer": "an", "explanation": "'Interesting book' singolare numerabile generico con suono vocalico -> 'an'."}, {"id": "A-L005-01", "tag": "Lezione 005 · Q01", "lesson": "Lezione 005", "stem": "The specific set of step-by-step instructions or rules used by a computer to perform calculations, solve problems, or learn from data is called a(n) __________.", "options": ["dataset", "data wrangling", "algorithm", "deep learning"], "answer": "algorithm", "explanation": "Insieme ordinato di istruzioni passo-passo usato dal computer = 'algorithm'."}, {"id": "A-L005-02", "tag": "Lezione 005 · Q02", "lesson": "Lezione 005", "stem": "______________ is designed to perform a narrow task, such as facial recognition.", "options": ["Artificial Superintelligence", "Strong Artificial Intelligence", "Weak Artificial Intelligence", "Artificial General Intelligence"], "answer": "Weak Artificial Intelligence", "explanation": "Dalla Lez. 05: 'Weak AI (narrow AI)' svolge un singolo compito specifico (es. facial recognition)."}, {"id": "A-L006-01", "tag": "Lezione 006 · Q01", "lesson": "Lezione 006", "stem": "The term ___________ refers to medical operations using powerful narrow beams of light.", "options": ["prosthetic", "laser surgery", "keyhole surgery", "3D printing"], "answer": "laser surgery", "explanation": "Dalla Lez. 06: 'laser surgery' = operazioni mediche con potenti fasci di luce stretti."}, {"id": "A-L006-02", "tag": "Lezione 006 · Q02", "lesson": "Lezione 006", "stem": "____________ can identify health problems at an early stage.", "options": ["Scanners", "Hearing aids", "Prosthetics", "Pacemakers"], "answer": "Scanners", "explanation": "Dalla Lez. 06: gli 'Scanners' diagnostici individuano problemi di salute in fase precoce."}, {"id": "A-L007-01", "tag": "Lezione 007 · Q01", "lesson": "Lezione 007", "stem": "There is _________ milk in the glass.", "options": ["few", "a few", "little", "any"], "answer": "little", "explanation": "'Milk' è uncountable e frase affermativa -> 'little'."}, {"id": "A-L007-02", "tag": "Lezione 007 · Q02", "lesson": "Lezione 007", "stem": "How ________ information can a human brain store?", "options": ["much", "many", "enough", "any"], "answer": "much", "explanation": "'Information' è sempre uncountable -> 'How much information...?'."}, {"id": "A-L007-03", "tag": "Lezione 007 · Q03", "lesson": "Lezione 007", "stem": "I put too _______ sugar in my pasta sauce.", "options": ["a lot of", "lots of", "much", "many"], "answer": "much", "explanation": "'Too much + uncountable' ('too much sugar'). Mai 'too a lot of'."}, {"id": "A-L007-04", "tag": "Lezione 007 · Q04", "lesson": "Lezione 007", "stem": "\"Is there _______ orange juice left?\" \"No, but we have ______ apple juice.\"", "options": ["some / any", "an / an", "any / some", "some / some"], "answer": "any / some", "explanation": "Domanda -> 'any'; risposta affermativa -> 'some' ('juice' è uncountable)."}, {"id": "A-L008-01", "tag": "Lezione 008 · Q01", "lesson": "Lezione 008", "stem": "I like window shopping on my way ___ home.", "options": ["to", "at", "---", "in"], "answer": "---", "explanation": "Con 'on my way home' non si mette preposizione prima di 'home'."}, {"id": "A-L008-02", "tag": "Lezione 008 · Q02", "lesson": "Lezione 008", "stem": "Sara never sleeps ____ the afternoon.", "options": ["on", "to", "at", "in"], "answer": "in", "explanation": "Con le parti del giorno ('the morning/afternoon/evening') si usa 'in'."}, {"id": "A-L009-01", "tag": "Lezione 009 · Q01", "lesson": "Lezione 009", "stem": "The ______________ is the network of physical devices.", "options": ["Internet of Things (IoT)", "Information and Communications Technology (ICT)", "Artificial Intelligence", "automation"], "answer": "Internet of Things (IoT)", "explanation": "Dalla Lez. 09: 'IoT' è la rete di dispositivi fisici connessi."}, {"id": "A-L009-02", "tag": "Lezione 009 · Q02", "lesson": "Lezione 009", "stem": "Non-tangible infrastructure refers to ________.", "options": ["digital networks and data", "transportation", "facilities", "communication"], "answer": "digital networks and data", "explanation": "Dalla Lez. 09: 'Non-tangible infrastructure' = reti digitali e dati."}, {"id": "A-L010-01", "tag": "Lezione 010 · Q01", "lesson": "Lezione 010", "stem": "AI refers to the development of computer systems that can perform tasks that such as visual perception and speech __________.", "options": ["recognition", "recognising", "recommendation", "realisation"], "answer": "recognition", "explanation": "Collocazione fissa dalle slide Lez. 10: 'speech recognition'."}, {"id": "A-L010-02", "tag": "Lezione 010 · Q02", "lesson": "Lezione 010", "stem": "AI's comprehension ____________ extend beyond basic understanding.", "options": ["skills", "capabilities", "capable", "skillful"], "answer": "capabilities", "explanation": "Dalla Lez. 10: 'comprehension capabilities' (sostantivo plurale prima di 'extend')."}, {"id": "A-L011-01", "tag": "Lezione 011 · Q01", "lesson": "Lezione 011", "stem": "The _________ way to learn a language is to be among native speakers.", "options": ["effectivest", "more effective", "much effective", "most effective"], "answer": "most effective", "explanation": "Superlativo di aggettivo lungo -> 'the most effective'."}, {"id": "A-L011-02", "tag": "Lezione 011 · Q02", "lesson": "Lezione 011", "stem": "Many people think it is ______ to learn a language with AI than in the traditional way.", "options": ["the easiest", "more easy", "easier", "easiest"], "answer": "easier", "explanation": "Comparativo con 'than' per bisillabo in '-y' -> 'easier'."}, {"id": "A-L011-03", "tag": "Lezione 011 · Q03", "lesson": "Lezione 011", "stem": "AI often speaks in a robotic, _________ correct manner.", "options": ["more perfectly", "perfect", "perfectly", "perfecter"], "answer": "perfectly", "explanation": "Serve un avverbio per modificare l'aggettivo 'correct' -> 'perfectly correct'."}, {"id": "A-L011-04", "tag": "Lezione 011 · Q04", "lesson": "Lezione 011", "stem": "The _______ feature of AI language learning is its availability.", "options": ["worsest", "better", "best", "goodest"], "answer": "best", "explanation": "Superlativo irregolare di 'good' -> 'the best feature'."}, {"id": "A-L012-01", "tag": "Lezione 012 · Q01", "lesson": "Lezione 012", "stem": "How many hours do you ___________ work on weekdays?", "options": ["can", "should", "have to", "may"], "answer": "have to", "explanation": "Con l'ausiliare 'do' nelle domande di obbligo si usa il semimodale 'have to'."}, {"id": "A-L012-02", "tag": "Lezione 012 · Q02", "lesson": "Lezione 012", "stem": "You _____________ spend so much time on the Internet.", "options": ["shouldn't", "need", "aren't", "haven't to"], "answer": "shouldn't", "explanation": "Consiglio negativo: 'shouldn't + forma base senza to'."}, {"id": "A-L012-03", "tag": "Lezione 012 · Q03", "lesson": "Lezione 012", "stem": "I _________ be late this morning.", "options": ["am", "able to", "need", "might"], "answer": "might", "explanation": "Possibilità: 'might + forma base senza to' ('I might be late')."}, {"id": "A-L012-04", "tag": "Lezione 012 · Q04", "lesson": "Lezione 012", "stem": "Alex _________ already read when she was 5.", "options": ["should", "may", "can", "could"], "answer": "could", "explanation": "Abilità passata ('when she was 5'): 'could' + infinito base."}, {"id": "A-L013-01", "tag": "Lezione 013 · Q01", "lesson": "Lezione 013", "stem": "1, 3, 5, 7, 9 are ____ numbers.", "options": ["aggregate", "prime", "odd", "even"], "answer": "odd", "explanation": "1, 3, 5, 7, 9 sono numeri dispari = 'odd numbers' (1 e 9 non sono primi!)."}, {"id": "A-L013-02", "tag": "Lezione 013 · Q02", "lesson": "Lezione 013", "stem": "A _________ indicates the stages of a process.", "options": ["pie chart", "bar chart", "cross-section", "flowchart"], "answer": "flowchart", "explanation": "Un diagramma di flusso ('flowchart') indica le fasi di un processo."}, {"id": "A-L013-03", "tag": "Lezione 013 · Q03", "lesson": "Lezione 013", "stem": "The vertical axis of a graph is called the _________.", "options": ["y axis", "v axis", "z axis", "x axis"], "answer": "y axis", "explanation": "L'asse verticale di un grafico è la 'y axis' (orizzontale = 'x axis')."}, {"id": "A-L014-01", "tag": "Lezione 014 · Q01", "lesson": "Lezione 014", "stem": "The number of Internet users has grown ___________.", "options": ["considerably", "considerable", "considering", "considerate"], "answer": "considerably", "explanation": "Serve l'avverbio 'considerably' per modificare il verbo 'has grown'."}, {"id": "A-L015-01", "tag": "Lezione 015 · Q01", "lesson": "Lezione 015", "stem": "Listen to that girl! What language ___ she ________?", "options": ["does ___ speaking", "does ___ speak", "are ___ speaking", "is ___ speaking"], "answer": "is ___ speaking", "explanation": "Azione in corso ora ('Listen!'): Present Continuous con 'she' -> 'is she speaking?'."}, {"id": "A-L015-02", "tag": "Lezione 015 · Q02", "lesson": "Lezione 015", "stem": "These days I ________ on a very interesting project.", "options": ["am working", "work", "working", "works"], "answer": "am working", "explanation": "Situazione temporanea attuale ('These days'): Present Continuous -> 'am working'."}, {"id": "A-L015-03", "tag": "Lezione 015 · Q03", "lesson": "Lezione 015", "stem": "How often ________ you usually check your mailbox?", "options": ["does", "is", "are", "do"], "answer": "do", "explanation": "Abitudine al Present Simple ('How often... usually') con 'you' -> ausiliare 'do'."}, {"id": "A-L016-01", "tag": "Lezione 016 · Q01", "lesson": "Lezione 016", "stem": "The team _________ the statistics when Tom ________.", "options": ["was discussing / was arriving", "was discussing / arrived", "discussed / was arriving", "discussed / arrived"], "answer": "was discussing / arrived", "explanation": "Azione in corso nel passato ('was discussing') interrotta da evento breve ('arrived')."}, {"id": "A-L016-02", "tag": "Lezione 016 · Q02", "lesson": "Lezione 016", "stem": "Did you _____ well last night?", "options": ["sleeping", "slept", "sleeped", "sleep"], "answer": "sleep", "explanation": "Dopo 'Did + soggetto' il verbo resta sempre alla forma base: 'sleep'."}, {"id": "A-L016-03", "tag": "Lezione 016 · Q03", "lesson": "Lezione 016", "stem": "While the professor _________, the students __________ notes.", "options": ["was speaking / took", "spoke / were taking", "spoke / took", "was speaking / were taking"], "answer": "was speaking / were taking", "explanation": "Due azioni lunghe simultanee con 'While' -> entrambe al Past Continuous."}, {"id": "A-L017-01", "tag": "Lezione 017 · Q01", "lesson": "Lezione 017", "stem": "Steve earns a lot of money. He has the highest __________ in the family.", "options": ["cash", "salary", "retirement", "contract"], "answer": "salary", "explanation": "Stipendio legato al lavoro ('earns a lot of money'): 'salary'."}, {"id": "A-L017-02", "tag": "Lezione 017 · Q02", "lesson": "Lezione 017", "stem": "The HR Department selects the most suitable ______________ .", "options": ["promotion", "recruitment", "pension", "applications"], "answer": "applications", "explanation": "Dalla Lez. 17: 'The HR department selects the most suitable applications'."}, {"id": "A-L017-03", "tag": "Lezione 017 · Q03", "lesson": "Lezione 017", "stem": "When a company needs to _________ new people, it advertises the position.", "options": ["applicant", "recruitment", "candidate", "recruit"], "answer": "recruit", "explanation": "Dopo 'needs to' serve il verbo all'infinito: 'to recruit'."}, {"id": "A-L017-04", "tag": "Lezione 017 · Q04", "lesson": "Lezione 017", "stem": "In your cover letter you may summarise your top __________.", "options": ["qualifications", "equalities", "qualifiers", "qualifies"], "answer": "qualifications", "explanation": "In una cover letter si riassumono i propri titoli: 'qualifications'."}, {"id": "A-L018-01", "tag": "Lezione 018 · Q01", "lesson": "Lezione 018", "stem": "_________ students are studying for a Master's degree.", "options": ["Undergraduate", "Lecturer", "Degree", "Graduate"], "answer": "Graduate", "explanation": "'Graduate students' = studenti già laureati che studiano per un Master."}, {"id": "A-L018-02", "tag": "Lezione 018 · Q02", "lesson": "Lezione 018", "stem": "A(n) __________ is a title given to students by a college or university on completion of a program of study.", "options": ["degree", "assignment", "assessment", "evaluation"], "answer": "degree", "explanation": "Titolo accademico conferito a fine percorso universitario: 'degree'."}, {"id": "A-L018-03", "tag": "Lezione 018 · Q03", "lesson": "Lezione 018", "stem": "A __________ is the latest time or date by which something should be completed.", "options": ["paper", "feedback", "grade", "deadline"], "answer": "deadline", "explanation": "Scadenza ultima entro cui consegnare o completare qualcosa: 'deadline'."}, {"id": "A-L018-04", "tag": "Lezione 018 · Q04", "lesson": "Lezione 018", "stem": "Every student participated in the heated __________.", "options": ["argue", "debate", "reflection", "demand"], "answer": "debate", "explanation": "Dopo 'the heated...' serve un sostantivo: 'heated debate'."}, {"id": "A-L019-01", "tag": "Lezione 019 · Q01", "lesson": "Lezione 019", "stem": "We still ____________ our project.", "options": ["hasn't finished", "haven't finished", "weren't finished", "didn't finish"], "answer": "haven't finished", "explanation": "Con 'still' prima dell'ausiliare negativo al Present Perfect -> 'still haven't finished'."}, {"id": "A-L019-02", "tag": "Lezione 019 · Q02", "lesson": "Lezione 019", "stem": "I _____ our new colleague yesterday.", "options": ["have been meeting", "have met", "met", "meeted"], "answer": "met", "explanation": "Tempo passato concluso ('yesterday'): obbligatorio il Past Simple ('met')."}, {"id": "A-L019-03", "tag": "Lezione 019 · Q03", "lesson": "Lezione 019", "stem": "Have you been to Japan _____?", "options": ["ever", "yet", "just", "still"], "answer": "yet", "explanation": "A fine frase interrogativa al Present Perfect va 'yet' ('ever' andrebbe prima di 'been')."}, {"id": "A-L019-04", "tag": "Lezione 019 · Q04", "lesson": "Lezione 019", "stem": "____ you ________ the manager recently?", "options": ["Have ___ seen", "Were ___ see", "Did ___ see", "Have ___ saw"], "answer": "Have ___ seen", "explanation": "'Recently' senza tempo concluso -> Present Perfect ('Have you seen...'); participio = 'seen'."}, {"id": "A-L019-05", "tag": "Lezione 019 · Q05", "lesson": "Lezione 019", "stem": "You ___________ that email for an hour.", "options": ["has written", "have writing", "writed", "have been writing"], "answer": "have been writing", "explanation": "Durata fino al presente ('for an hour'): Present Perfect Continuous ('have been writing')."}, {"id": "A-L020-01", "tag": "Lezione 020 · Q01", "lesson": "Lezione 020", "stem": "Don't forget about the presentation _______ you have to give next week!", "options": ["that", "whom", "whose", "who"], "answer": "that", "explanation": "Pronome relativo per una cosa ('the presentation') -> 'that'."}, {"id": "A-L020-02", "tag": "Lezione 020 · Q02", "lesson": "Lezione 020", "stem": "The candidate, ______ CV is remarkable, meets all the job requirements.", "options": ["whom", "whose", "that", "which"], "answer": "whose", "explanation": "Pronome relativo possessivo ('il cui CV'): 'whose CV'."}, {"id": "A-L021-01", "tag": "Lezione 021 · Q01", "lesson": "Lezione 021", "stem": "What do you have to consider when you prepare a presentation?", "options": ["only the purpose of the presentation", "only your audience", "audience, purpose of presentation, time frame", "only the time frame"], "answer": "audience, purpose of presentation, time frame", "explanation": "Occorre considerare pubblico, scopo e tempo a disposizione."}, {"id": "A-L021-02", "tag": "Lezione 021 · Q02", "lesson": "Lezione 021", "stem": "In which part of the presentation is it better to tell a story or an anecdote?", "options": ["opening", "main part", "conclusion", "Q&A session"], "answer": "opening", "explanation": "Dalla slide Lez. 21 ('Effective openings'): 'Stories and anecdotes' vanno nell'opening."}, {"id": "A-L022-01", "tag": "Lezione 022 · Q01", "lesson": "Lezione 022", "stem": "Which expression is FORMAL?", "options": ["I would like to apologise for...", "Sorry about...", "Please forgive me for...", "It was silly of me to..."], "answer": "I would like to apologise for...", "explanation": "Formula di scuse formale ('Sorry about', 'Please forgive me' sono informali)."}, {"id": "A-L022-02", "tag": "Lezione 022 · Q02", "lesson": "Lezione 022", "stem": "Which expression is FORMAL?", "options": ["I would be grateful if you could tell me...", "I’d like to know if...", "Could you let me know...", "Can you give me an idea..."], "answer": "I would be grateful if you could tell me...", "explanation": "Richiesta di informazioni di registro formale."}, {"id": "A-L023-01", "tag": "Lezione 023 · Q01", "lesson": "Lezione 023", "stem": "Luisa _______ finish her paper this evening.", "options": ["is going to", "is going", "going", "will be"], "answer": "is going to", "explanation": "Intenzione futura già decisa ('is going to finish'). Manca 'to' in 'is going'."}, {"id": "A-L023-02", "tag": "Lezione 023 · Q02", "lesson": "Lezione 023", "stem": "“I'm tired, and I still have a lot to do.” “Don't panic. I _______ you.”", "options": ["I'll help", "helping", "going to help", "help"], "answer": "I'll help", "explanation": "Offerta spontanea immediata ('Don't panic!'). Nota: nel PDF c'è il refuso del doppio 'I'."}, {"id": "A-L023-03", "tag": "Lezione 023 · Q03", "lesson": "Lezione 023", "stem": "I _____________ my doctor tomorrow morning at 9. I have an appointment.", "options": ["see", "am going to see", "will see", "am seeing"], "answer": "am seeing", "explanation": "Appuntamento già fissato ('I have an appointment'): Present Continuous futuro."}, {"id": "A-L024-01", "tag": "Lezione 024 · Q01", "lesson": "Lezione 024", "stem": "If you freeze water, it _______ solid.", "options": ["becomes", "became", "become", "would become"], "answer": "becomes", "explanation": "Zero Conditional (legge fisica sempre valida): Present Simple + Present Simple."}, {"id": "A-L024-02", "tag": "Lezione 024 · Q02", "lesson": "Lezione 024", "stem": "I ______ you as soon as I get home.", "options": ["would call", "called", "call", "'ll call"], "answer": "'ll call", "explanation": "Temporale futura con 'as soon as' + Present Simple -> principale con 'will' ('I'll call')."}, {"id": "A-L024-03", "tag": "Lezione 024 · Q03", "lesson": "Lezione 024", "stem": "If I _______ you, I _________ the job offer.", "options": ["were / would accepted", "were / would accept", "would be / accepted", "would be / would accepted"], "answer": "were / would accept", "explanation": "Second Conditional: 'If I were you, I would accept...' ('would' + forma base)."}], "open": [{"id": "A-OP-L002-08", "tag": "Lezione 002 · Q08", "module": "Online shopping", "prompt": "Describe the process of online shopping. Use as many keywords as you can.", "model": "To shop online, you first browse an e-commerce website and use the search bar to find the products you need. After comparing prices and reading reviews, you add the items to your shopping cart. Finally, you go to the checkout page, enter your shipping address and payment details, and confirm the order to receive a confirmation email with a tracking number.", "keywords": "Keywords: browse, search bar, shopping cart, checkout page, shipping address, payment details, tracking number."}, {"id": "A-OP-L002-09", "tag": "Lezione 002 · Q09", "module": "Social networking site", "prompt": "What is your favourite social networking site? What do you use it for?", "model": "My favourite social networking site is LinkedIn, because it is very useful for my studies in Computer Engineering and Cybersecurity. I use it to follow industry professionals, read articles about software development and security trends, and look for internship or career opportunities while building a professional network.", "keywords": "Keywords: social networking site, profile, network, follow, professional connections."}, {"id": "A-OP-L003-05", "tag": "Lezione 003 · Q05", "module": "Hardware vs Software", "prompt": "Explain the difference between hardware and software. Give some examples.", "model": "Hardware refers to the physical, tangible components of a computer system that you can touch, such as the CPU, RAM, hard drive, keyboard, and USB flash drives. Software consists of the intangible programs and operating systems—like Windows, Linux, or spreadsheets—that tell the hardware what tasks to perform. Hardware and software depend on each other to work.", "keywords": "Keywords: tangible, CPU, RAM, storage device, operating system, applications."}, {"id": "A-OP-L004-08", "tag": "Lezione 004 · Q08", "module": "6 Gap: THE / A / AN / ---", "prompt": "Fill in the gaps with THE, A, AN or --- (no article).\nMy uncle lives in ___ Germany.\nPeggy is ___ intelligent girl.\nParis is ___ capital of France.\nGeorge doesn't like ___ children.\nShe dedicated her life to helping ___ poor.\nTom has ___ Master's degree in Maths.", "model": "1. --- Germany (nomi di nazioni singolari: zero articolo)\n2. an intelligent girl (singolare generico con suono vocalico)\n3. the capital of France (specificata: 'the')\n4. --- children (plurale generico: zero articolo)\n5. the poor ('the' + aggettivo per categoria sociale)\n6. a Master's degree (singolare generico con suono consonantico)", "keywords": "Regola: zero article per Paesi singolari e plurali generali; 'the' per categorie ('the poor') o elementi definiti."}, {"id": "A-OP-L005-03", "tag": "Lezione 005 · Q03", "module": "Science vs Technology", "prompt": "What is the difference between science and technology?", "model": "Science aims to understand how the natural world works by observing phenomena, forming hypotheses, and testing theories to gain knowledge. Technology applies that scientific knowledge for practical purposes to create tools, machines, and digital systems—such as medical scanners or AI—that solve real-world problems.", "keywords": "Keywords: theories, hypotheses, practical application, tools, problem-solving."}, {"id": "A-OP-L006-03", "tag": "Lezione 006 · Q03", "module": "Medical technology", "prompt": "Name at least two advancements in medical technology. What are they used for?", "model": "Two key advancements in medical technology are diagnostic scanners and laser surgery. Scanners like MRI and CT machines take detailed internal images to detect health problems at an early stage. Laser surgery uses powerful narrow beams of light to perform precise operations, such as correcting vision, with minimal recovery time.", "keywords": "Keywords: diagnostic scanners, early stage, laser surgery, keyhole surgery, minimally invasive."}, {"id": "A-OP-L007-05", "tag": "Lezione 007 · Q05", "module": "6 Gap: SOME / ANY / NO", "prompt": "Fill in the gaps with SOME, ANY or NO.\nI have not uploaded ___ files, yet.\n___ mobile phones include games. They are cool!\nHave you received ___ calls today?\nIn the early days the iPhone was unique. It had ___ competitors.\nThere are ___ newer, updated versions of these devices. They are very good.\nHave you downloaded ___ apps from the online store?", "model": "1. any files (frase negativa)\n2. Some mobile phones (frase affermativa)\n3. any calls (domanda generica)\n4. no competitors (verbo affermativo 'had' + negazione)\n5. some newer, updated versions (affermativa plurale)\n6. any apps (domanda generica)", "keywords": "Regola: 'some' nelle affermative, 'any' nelle negative/domande, 'no' con verbo affermativo."}, {"id": "A-OP-L008-03", "tag": "Lezione 008 · Q03", "module": "6 Gap: Preposizioni", "prompt": "Fill in the gaps with the right preposition.\nWhen are you going ___ Norway?\n___ the 22nd of August.\nWhat time does your plane leave?\n___ 7.15.\nWhen do you need to be ___ the airport?\nBefore 6 a.m. I'll go ___ bus.\nAnd when are you coming back?\n___ Monday.", "model": "1. to Norway (moto a luogo)\n2. On the 22nd of August (data precisa)\n3. At 7.15 (orario preciso)\n4. at the airport (punto specifico)\n5. by bus (mezzo di trasporto senza articolo)\n6. On Monday (giorno della settimana)", "keywords": "Regola: AT (ore, luoghi puntuali), ON (giorni, date), IN (mesi, anni, parti del giorno), BY + mezzo."}, {"id": "A-OP-L009-03", "tag": "Lezione 009 · Q03", "module": "New tech & citizens' lives", "prompt": "In what ways can new technologies improve the life of citizens?", "model": "New technologies improve citizens' daily lives in many ways. In smart cities, the Internet of Things (IoT) uses sensors to reduce traffic congestion, optimize smart parking, and save energy. Meanwhile, non-tangible digital infrastructure enables fast online public services, telemedicine, and remote learning, making urban life more efficient.", "keywords": "Keywords: smart cities, Internet of Things (IoT), sensors, digital infrastructure, public services."}, {"id": "A-OP-L010-03", "tag": "Lezione 010 · Q03", "module": "AI language learning", "prompt": "In your opinion, is AI language learning effective? Why (not)?", "model": "AI language learning is very effective as a supporting tool, though it cannot completely replace human interaction. AI apps offer 24/7 availability, personalized exercises, and instant feedback on grammar and speech recognition. However, AI lacks cultural nuance and natural conversational unpredictability, so combining it with human practice works best.", "keywords": "Keywords: availability, instant feedback, speech recognition, personalized, human interaction."}, {"id": "A-OP-L011-05", "tag": "Lezione 011 · Q05", "module": "Compare two cities", "prompt": "Compare two cities of your choice. Use as many comparative adjectives as you can.", "model": "Rome is much older and historically richer than Milan, with warmer winters and more impressive ancient monuments. On the other hand, Milan is more modern, cleaner, and better organized in terms of public transport, making commuting faster and easier. Although Milan is more expensive, Rome is often noisier and more crowded.", "keywords": "Comparativi: older, richer, warmer, more impressive, more modern, cleaner, better organized, faster, easier, more expensive, noisier."}, {"id": "A-OP-L014-02", "tag": "Lezione 014 · Q02", "module": "Digital habits (6 parole)", "prompt": "Write about recent trends related to digital habits across generations. Use the following words: SIGNIFICANT, SIGNIFICANTLY, INCREASE,\nDECREASE, BOTTOM OUT, REMAIN STABLE.", "model": "Digital habits across generations have shifted markedly. Social media use among over-55s has seen a SIGNIFICANT increase, while teenagers' interest in Facebook has started to DECREASE SIGNIFICANTLY. Overall smartphone screen time continues to INCREASE, whereas casual desktop browsing seems to BOTTOM OUT or REMAIN STABLE.", "keywords": "Tutte e 6 le parole richieste incluse: SIGNIFICANT, SIGNIFICANTLY, INCREASE, DECREASE, BOTTOM OUT, REMAIN STABLE."}, {"id": "A-OP-L015-04", "tag": "Lezione 015 · Q04", "module": "Verb + Structure: Present Simple", "prompt": "Complete the sentence with the correct form of the verb. What is the name of the structure and when is it used?\nPatrick usually _______ (go) to work early in the morning.", "model": "Frase: Patrick usually GOES to work early in the morning.\nStruttura: Present Simple.\nUso: azioni abituali, routine quotidiane e fatti ricorrenti (qui con 'usually').", "keywords": "Attenzione alla -es in 3ª persona singolare ('goes')."}, {"id": "A-OP-L015-05", "tag": "Lezione 015 · Q05", "module": "Verb + Structure: Present Continuous", "prompt": "Complete the sentence with the correct form of the verb. What is the name of the structure and when is it used?\nThe number of Internet users __________ (grow) rapidly.", "model": "Frase: The number of Internet users IS GROWING rapidly.\nStruttura: Present Continuous.\nUso: tendenze e situazioni in evoluzione/cambiamento nel presente.", "keywords": "'The number of...' regge il verbo al singolare ('is growing')."}, {"id": "A-OP-L016-04", "tag": "Lezione 016 · Q04", "module": "Verb + Structure: Past Continuous", "prompt": "Complete the sentence with the correct form of the verb. What is the name of the structure and when is it used?\nWe __________ (analyse) the data when the fire alarm went off.", "model": "Frase: We WERE ANALYSING the data when the fire alarm went off.\nStruttura: Past Continuous (con Past Simple).\nUso: azione prolungata in corso nel passato interrotta da un evento breve ('went off').", "keywords": "Accordo: 'We' -> 'were analysing'."}, {"id": "A-OP-L016-05", "tag": "Lezione 016 · Q05", "module": "Verb + Structure: Past Simple", "prompt": "Complete the sentence with the correct form of the verb. What is the name of the structure and when is it used?\nYesterday Penny _______ (buy) a new smartphone.", "model": "Frase: Yesterday Penny BOUGHT a new smartphone.\nStruttura: Past Simple.\nUso: azione conclusa in un tempo passato definito ('Yesterday').", "keywords": "Irregolare: buy -> bought."}, {"id": "A-OP-L017-05", "tag": "Lezione 017 · Q05", "module": "Studies / Job responsibilities", "prompt": "Describe your job tasks and responsibilities. If you do not have a job, write about your studies.", "model": "I am a Computer and Automation Engineering student specialising in Cybersecurity. My routine involves attending lectures, practising programming, analysing computer networks, and preparing for technical exams. I manage study deadlines and solve practical lab problems to prepare for a career as a cybersecurity specialist.", "keywords": "Keywords: Computer Engineering, Cybersecurity, coursework, deadlines, problem-solving."}, {"id": "A-OP-L018-05", "tag": "Lezione 018 · Q05", "module": "Degree vs Work experience", "prompt": "Is it better to have a degree before starting work, or to gain work experience before going to university? Write your opinion.", "model": "In technical fields like engineering, earning a degree before starting full-time work—combined with short internships—is usually the best path. University builds strong theoretical foundations and recognized qualifications, while early practical experience teaches teamwork, workplace deadlines, and how to apply theory.", "keywords": "Keywords: degree, qualifications, theoretical foundations, internships, deadlines."}, {"id": "A-OP-L019-06", "tag": "Lezione 019 · Q06", "module": "Verb + Structure: Present Perfect Continuous", "prompt": "Complete the sentence with the correct form of the verb. What is the name of the structure and when is it used?\nYour clothes are wet. _____ you ___________ (play) water games?", "model": "Frase: Your clothes are wet. HAVE you BEEN PLAYING water games?\nStruttura: Present Perfect Continuous.\nUso: attività recente appena conclusa con un risultato visibile nel presente ('clothes are wet').", "keywords": "Formula interrogativa: Have/Has + sogg. + been + -ing."}, {"id": "A-OP-L019-07", "tag": "Lezione 019 · Q07", "module": "Verb + Structure: Present Perfect Simple", "prompt": "Complete the sentence with the correct form of the verb. What is the name of the structure and when is it used?\nI _________ (catch) a bad cold. I cannot go to work today.", "model": "Frase: I HAVE CAUGHT / 'VE CAUGHT a bad cold. I cannot go to work today.\nStruttura: Present Perfect Simple.\nUso: evento passato recente (senza tempo finito) il cui effetto vale ora ('cannot go to work today').", "keywords": "Irregolare: catch -> caught."}, {"id": "A-OP-L021-03", "tag": "Lezione 021 · Q03", "module": "4 elements of CONCLUSION", "prompt": "What should the conclusion of a presentation include? Write at least four elements.", "model": "1. Indicating the end of the talk ('This brings me to the end...')\n2. Summarizing the main points ('To sum up / Let me go over...')\n3. Making recommendations ('We therefore recommend that...')\n4. Inviting questions ('Are there any questions?')", "keywords": "Dalla slide Lez. 21 p. 5 (opzionali: quote o riferimento all'aneddoto iniziale)."}, {"id": "A-OP-L021-04", "tag": "Lezione 021 · Q04", "module": "4 elements of INTRODUCTION", "prompt": "What should the introduction of a presentation include? Write at least four elements.", "model": "1. Welcoming the audience ('Good morning, ladies and gentlemen')\n2. Introducing yourself and your role/company\n3. Introducing the topic and explaining why it is relevant\n4. Stating your purpose, timing, and structure/sequencing (e spiegare quando fare domande).", "keywords": "Dalla slide Lez. 21 p. 2."}, {"id": "A-OP-L023-04", "tag": "Lezione 023 · Q04", "module": "Verb + Structure: Present Continuous (Future)", "prompt": "Complete the sentence with the correct form of the verb. What is the name of the structure and when is it used?\nWe ________ (travel) to Greece on Wednesday morning. I have booked a room at a fancy hotel.", "model": "Frase: We ARE TRAVELLING to Greece on Wednesday morning. I have booked a room at a fancy hotel.\nStruttura: Present Continuous con valore di futuro.\nUso: piani/impegni futuri già decisi e organizzati ('have booked a room').", "keywords": "UK spelling: 'are travelling'."}, {"id": "A-OP-L023-05", "tag": "Lezione 023 · Q05", "module": "Verb + Structure: Present Simple (Future)", "prompt": "Complete the sentence with the correct form of the verb. What is the name of the structure and when is it used?\nBianca's flight ________ (arrive) at 10:30.", "model": "Frase: Bianca's flight ARRIVES at 10:30.\nStruttura: Present Simple con valore di futuro.\nUso: orari ufficiali, tabelle di marcia, voli e treni ('timetables / schedules').", "keywords": "Identico all'esercizio 6D / 8 delle slide Lez. 23."}]}, "B": {"name": "Lingua Inglese B (Dindelli)", "examSize": 23, "examMax": 27, "closed": [{"id": "B-01", "locs": ["L002.01", "L004.08"], "lesson": "Lezione 002", "stem": "Geotagging is _____.", "options": ["tagging people in various places.", "/", "telling people where a location is by tagging it. Basically you add the geographical identification of a place to socail media.", "tagging people and places for geographical use."], "answer": "telling people where a location is by tagging it. Basically you add the geographical identification of a place to socail media.", "explanation": "Wordlist Environment: aggiungere tag geografici sui social media (refuso 'socail' nel PDF).", "tag": "L002.01 · L004.08"}, {"id": "B-02", "locs": ["L002.02", "L002.14"], "lesson": "Lezione 002", "stem": "Priscilla and Hector got married in 1975. They _____ for over forty years.", "options": ["married", "have been married", "were married", "are married"], "answer": "have been married", "explanation": "Present Perfect di stato con 'for over forty years'.", "tag": "L002.02 · L002.14"}, {"id": "B-03", "locs": ["L002.03", "L002.15"], "lesson": "Lezione 002", "stem": "We've been working in this country _____ .", "options": ["for five years", "five years ago", "from five years", "since five years"], "answer": "for five years", "explanation": "'For' + durata di tempo; 'since' richiede un punto d'inizio preciso.", "tag": "L002.03 · L002.15"}, {"id": "B-04", "locs": ["L002.04", "L002.16"], "lesson": "Lezione 002", "stem": "Some species of animals _____ endangered for many years.", "options": ["have", "are", "are being", "have been"], "answer": "have been", "explanation": "Present Perfect ('have been') per stato iniziato nel passato e valido ancora ('for many years').", "tag": "L002.04 · L002.16"}, {"id": "B-05", "locs": ["L002.05", "L002.17", "L006.14", "L018.02"], "lesson": "Lezione 002", "stem": "I went to an Italian restaurant and had _____.", "options": ["a delicous meat", "some delicious meat", "some delicious meats.", "one delicious meat"], "answer": "some delicious meat", "explanation": "'Meat' è uncountable (niente 'a/one/meats'; occhio al refuso 'delicous').", "tag": "L002.05 · L002.17 · L006.14 · L018.02"}, {"id": "B-06", "locs": ["L002.06", "L005.08"], "lesson": "Lezione 002", "stem": "Endangered species and animals in extinction have the same meaning.", "options": ["Endangered species are animales that are at risk of extinction.", "Extinct animals and plants are at risk of extinction.", "Extinct animals and plants are still alive.", "Endangered species are't alive anywhere in the world."], "answer": "Endangered species are animales that are at risk of extinction.", "explanation": "'Endangered' = a rischio estinzione (ancora vivi); 'extinct' = già scomparsi.", "tag": "L002.06 · L005.08"}, {"id": "B-07", "locs": ["L002.07", "L005.01"], "lesson": "Lezione 002", "stem": "I _____ embarrassed when a lady spotted me looking at her beautiful sandals.", "options": ["fell", "fell", "felt", "feel"], "answer": "felt", "explanation": "Past Simple di 'feel' = 'felt' ('fell' è il passato di 'fall').", "tag": "L002.07 · L005.01"}, {"id": "B-08", "locs": ["L002.08", "L005.05"], "lesson": "Lezione 002", "stem": "Many countries _____ the Paris climate deal. Many big fashion companies _____ that they would choose better materials and reduce waste and emissions.", "options": ["have signed / have promised", "had signed / have promised", "signed / have promised", "have signed / promised"], "answer": "have signed / promised", "explanation": "1ª frase: risultato attuale -> Present Perfect ('have signed'). 2ª frase: discorso indiretto al passato -> Past Simple ('promised').", "tag": "L002.08 · L005.05"}, {"id": "B-09", "locs": ["L002.09", "L004.09"], "lesson": "Lezione 002", "stem": "Fred _____ for the bus for more than twenty minutes: he's getting upset.", "options": ["waits", "has waited", "has been waiting", "is waiting"], "answer": "has been waiting", "explanation": "Present Perfect Continuous: azione continua fino ad ora con effetto visibile.", "tag": "L002.09 · L004.09"}, {"id": "B-10", "locs": ["L002.10", "L004.10"], "lesson": "Lezione 002", "stem": "Correct the mistake: Henry has been studying music from when he was a child.", "options": ["Henry has been studying music from he was a child.", "Henry has been studying music since he has been a child.", "Henry has been studying music since he was a child.", "Henry has studying music since he was a child."], "answer": "Henry has been studying music since he was a child.", "explanation": "Con un punto d'inizio al passato si usa 'since + Past Simple', non 'from when'.", "tag": "L002.10 · L004.10"}, {"id": "B-11", "locs": ["L002.11", "L003.09"], "lesson": "Lezione 002", "stem": "I _____ petrol. Is there a gasoline station nearby?", "options": ["have run up", "have ran out of", "have run out of", "have run out"], "answer": "have run out of", "explanation": "'Run out of' + nome; participio passato di 'run' = 'run', non 'ran'.", "tag": "L002.11 · L003.09"}, {"id": "B-12", "locs": ["L002.12", "L003.10"], "lesson": "Lezione 002", "stem": "You'll never believe this: I _____ my first boyfriend right here in New York during my holiday.", "options": ["ran into", "ran to", "ran towards", "ran in"], "answer": "ran into", "explanation": "Phrasal verb 'run into' = incontrare per caso.", "tag": "L002.12 · L003.10"}, {"id": "B-13", "locs": ["L002.13", "L003.15"], "lesson": "Lezione 002", "stem": "The major cities _____ a solution for urban traffic yet.", "options": ["can't find", "haven't found", "aren't finding", "didn't find"], "answer": "haven't found", "explanation": "Con 'yet' in frase negativa si usa il Present Perfect.", "tag": "L002.13 · L003.15"}, {"id": "B-14", "locs": ["L003.01", "L008.02"], "lesson": "Lezione 003", "stem": "How do you manage your time when you’re on holiday? What does ‘manage’ imply?", "options": ["Manipulate your time.", "Organize your time.", "Check your time.", "Order your time."], "answer": "Organize your time.", "explanation": "'Manage your time' = organizzare/gestire il tempo.", "tag": "L003.01 · L008.02"}, {"id": "B-15", "locs": ["L003.02", "L008.01"], "lesson": "Lezione 003", "stem": "It’s the worst nightmare holiday I’ve ever had. Weather was bad, food was insipid, roads were closed for the floods, and everything was expensive! What does ‘nightmare’ imply?", "options": ["An unpleasant situation.", "A night out.", "A Halloween leisure holiday.", "An unpleasant treat."], "answer": "An unpleasant situation.", "explanation": "'Nightmare' in senso figurato = situazione spiacevole/terribile.", "tag": "L003.02 · L008.01"}, {"id": "B-16", "locs": ["L003.03", "L008.03"], "lesson": "Lezione 003", "stem": "Jenny was not a talkative child, she _____ very shy.", "options": ["had been", "used to be", "use to be", "has been"], "answer": "used to be", "explanation": "'Used to + infinito' per stati o abitudini passate.", "tag": "L003.03 · L008.03"}, {"id": "B-17", "locs": ["L003.04", "L007.02"], "lesson": "Lezione 003", "stem": "We were walking along the Thames River when we came _____ Nigel, an old classmate!", "options": ["about", "through", "into", "across"], "answer": "across", "explanation": "'Come across someone' = incontrare per caso.", "tag": "L003.04 · L007.02"}, {"id": "B-18", "locs": ["L003.05", "L007.03"], "lesson": "Lezione 003", "stem": "She _____ German when she's with her parents. Unfortunately, her boyfriend doesn't understand it.", "options": ["is use to speaking", "is used to speak", "is using to speaking", "is used to speaking"], "answer": "is used to speaking", "explanation": "'Be used to + -ing' = essere abituato a fare qualcosa.", "tag": "L003.05 · L007.03"}, {"id": "B-19", "locs": ["L003.06", "L006.12"], "lesson": "Lezione 003", "stem": "I called Felicia so many times. I needed to ask you a favour. What _____ when I _____ you?", "options": ["did you do / was calling", "did you do / called", "were you doing / called", "were you doing / was calling"], "answer": "were you doing / called", "explanation": "Azione in corso ('were you doing') interrotta da evento breve ('called').", "tag": "L003.06 · L006.12"}, {"id": "B-20", "locs": ["L003.07", "L006.11"], "lesson": "Lezione 003", "stem": "Ned _____ on holidays to Spain every summer when he was a child.", "options": ["had gone", "use to go", "used to go", "has gone"], "answer": "used to go", "explanation": "Abitudine regolare passata: 'used to go'.", "tag": "L003.07 · L006.11"}, {"id": "B-21", "locs": ["L003.08", "L007.01"], "lesson": "Lezione 003", "stem": "_____ to bed early when you were a child?", "options": ["Did you use to go", "Did you used going", "Were you used to go", "Did you used to go"], "answer": "Did you use to go", "explanation": "Interrogativa di 'used to': 'Did + sogg. + use to' (senza '-d').", "tag": "L003.08 · L007.01"}, {"id": "B-22", "locs": ["L003.11", "L009.02"], "lesson": "Lezione 003", "stem": "Do you usually pick up souvenirs when travelling? What is the meaning of 'pick up something' in this sentence?", "options": ["To identify or recognize something.", "To collect something from the floor/ground.", "To go soewhere in your car and collect somebody.", "To collect something from a place."], "answer": "To collect something from a place.", "explanation": "Nel contesto dei souvenir in viaggio = acquistare/raccogliere da un luogo.", "tag": "L003.11 · L009.02"}, {"id": "B-23", "locs": ["L003.12", "L009.03"], "lesson": "Lezione 003", "stem": "Tourists usually get _____ when they are on holiday.", "options": ["ripped off", "ripped up", "ripped at", "ripped down"], "answer": "ripped off", "explanation": "'Get ripped off' = farsi fregare / pagare un prezzo eccessivo.", "tag": "L003.12 · L009.03"}, {"id": "B-24", "locs": ["L003.13", "L009.04"], "lesson": "Lezione 003", "stem": "_____ you _____ the US every year? You changed destination.", "options": ["Didn't / use to go to", "Didn't / use to go", "Didn't / go to", "Didn't / used to go to"], "answer": "Didn't / use to go to", "explanation": "Interrogativa negativa con 'used to' + moto a luogo 'go to'.", "tag": "L003.13 · L009.04"}, {"id": "B-25", "locs": ["L003.14", "L009.01"], "lesson": "Lezione 003", "stem": "The flight I was supposed to catch has been _____.", "options": ["delayed", "deleted", "in late", "late"], "answer": "delayed", "explanation": "Per i voli in ritardo si usa 'delayed' (non 'deleted').", "tag": "L003.14 · L009.01"}, {"id": "B-26", "locs": ["L004.01", "L012.03"], "lesson": "Lezione 004", "stem": "Walter likes sports cars, but he hasn’t got _____ to buy one.", "options": ["too much money", "enough money", "the enough money", "money enough"], "answer": "enough money", "explanation": "'Enough' precede sempre il sostantivo ('enough money').", "tag": "L004.01 · L012.03"}, {"id": "B-27", "locs": ["L004.02", "L011.01"], "lesson": "Lezione 004", "stem": "My teacher always says that when I usually don’t understand a word in a text, I _____ .", "options": ["should look after it.", "should look for it.", "should look it up.", "should look up to it."], "answer": "should look it up.", "explanation": "'Look up a word' = cercare nel dizionario (pronome al centro: 'look it up').", "tag": "L004.02 · L011.01"}, {"id": "B-28", "locs": ["L004.03", "L010.03"], "lesson": "Lezione 004", "stem": "_____ I open the door? It looks like there is no breeze coming through the window and it's stuffy!", "options": ["Should", "Shall", "Shouldn't", "Must"], "answer": "Shall", "explanation": "'Shall I...?' per offrirsi di fare qualcosa / proporre.", "tag": "L004.03 · L010.03"}, {"id": "B-29", "locs": ["L004.04", "L012.02"], "lesson": "Lezione 004", "stem": "____ you please help me with my homework?", "options": ["Could", "Must", "Shall", "Might"], "answer": "Could", "explanation": "'Could you please...?' per richieste cortesi.", "tag": "L004.04 · L012.02"}, {"id": "B-30", "locs": ["L004.05", "L010.02"], "lesson": "Lezione 004", "stem": "Jack and Jill are _____ to buy cigarettes.", "options": ["too much young", "too young", "not enough young", "enough young"], "answer": "too young", "explanation": "'Too + aggettivo + to' (mai 'too much' davanti ad aggettivo).", "tag": "L004.05 · L010.02"}, {"id": "B-31", "locs": ["L004.06", "L011.03"], "lesson": "Lezione 004", "stem": "I love shopping, however, I _____ new clothes … I’ve got so many!", "options": ["shouldn't take", "shouldn't to buy", "mustn't buy", "shouldn't buy"], "answer": "shouldn't buy", "explanation": "Consiglio negativo: 'shouldn't + forma base senza to'.", "tag": "L004.06 · L011.03"}, {"id": "B-32", "locs": ["L004.07", "L010.01"], "lesson": "Lezione 004", "stem": "It’s a beautiful jacket! The colour suits you too. It _____ a lot!", "options": ["will cost", "can cost", "must have cost", "must to cost"], "answer": "must have cost", "explanation": "Deduzione logica forte riferita al passato ('must have + part. passato').", "tag": "L004.07 · L010.01"}, {"id": "B-33", "locs": ["L004.11", "L011.02"], "lesson": "Lezione 004", "stem": "Belinda is _____ to retire, she has been working for thirty-five years.", "options": ["too old", "enough old", "too young", "old enough"], "answer": "old enough", "explanation": "Con gli aggettivi 'enough' va sempre dopo ('old enough').", "tag": "L004.11 · L011.02"}, {"id": "B-34", "locs": ["L004.12", "L013.01"], "lesson": "Lezione 004", "stem": "I have to confess. I like buying! Even if I have a similar object at home, whether it’s clothes or furniture, I have to buy another one. Let’s face it: I’m a self-confessed shopaholic and I might have got this trait from my aunt Jill. What is the meaning of ‘shopaholic’?", "options": ["A person who enjoys shopping very much and does it a lot.", "A person who enjoys drinking alcohol and does it occasionally.", "A person who enjoys shopping and drinking.", "/"], "answer": "A person who enjoys shopping very much and does it a lot.", "explanation": "Dalla Wordlist Shopping: persona che ama comprare e lo fa moltissimo.", "tag": "L004.12 · L013.01"}, {"id": "B-35", "locs": ["L004.13", "L013.03"], "lesson": "Lezione 004", "stem": "My eldest son keeps on throwing money down the _____, buying useless stuff for his girlfriends!", "options": ["roof", "day", "ends", "drain"], "answer": "drain", "explanation": "Idiom: 'throw money down the drain' = sprecare soldi.", "tag": "L004.13 · L013.03"}, {"id": "B-36", "locs": ["L004.14", "L012.01"], "lesson": "Lezione 004", "stem": "When we say that a person is stingy we mean that they are _____", "options": ["not generous.", "generous.", "loaded.", "have enough money to spend on things you need."], "answer": "not generous.", "explanation": "'Stingy' = tirchio, non generoso.", "tag": "L004.14 · L012.01"}, {"id": "B-37", "locs": ["L004.15", "L013.02"], "lesson": "Lezione 004", "stem": "Do you like browsing the shops and going from one place to another to find your perfect deal? You probably would like to buy that latest cell phone that has been recently advertised on TV, but that costs an arm and a leg at your local shop. What does ‘cost an arm and a leg’ mean?", "options": ["A lot of money (for me).", "It's expensive for everyone!", "The price is reasonable.", "The cost is reasonably high."], "answer": "A lot of money (for me).", "explanation": "Idiom: costare un occhio della testa / moltissimi soldi.", "tag": "L004.15 · L013.02"}, {"id": "B-38", "locs": ["L005.02", "L017.03"], "lesson": "Lezione 005", "stem": "I _____ a birthday cake for your girlfriend, if you want.", "options": ["am making", "make", "will make", "am going to make"], "answer": "will make", "explanation": "Offerta spontanea ('if you want') -> 'will'.", "tag": "L005.02 · L017.03"}, {"id": "B-39", "locs": ["L005.03", "L016.03"], "lesson": "Lezione 005", "stem": "If you need a helping hand, call me and_____ over.", "options": ["I am", "I come", "I'll come", "I'm coming"], "answer": "I'll come", "explanation": "Promessa/offerta immediata -> 'I'll come'.", "tag": "L005.03 · L016.03"}, {"id": "B-40", "locs": ["L005.04"], "lesson": "Lezione 005", "stem": "The uncontrolled expansion of urban areas is a modern problem that is _____ the environment.", "options": ["threatening", "dying", "deathening", "treating"], "answer": "threatening", "explanation": "'Threaten' = minacciare l'ambiente.", "tag": "L005.04"}, {"id": "B-41", "locs": ["L005.06", "L017.01"], "lesson": "Lezione 005", "stem": "It is said that diners are more willing to tip more generously when it's a lovely sunny day and when romance is in the air. What is the meaning of 'diners'?", "options": ["A person who has a meal at a restaurant.", "A meal.", "A restaurant.", "A restaurant car."], "answer": "A person who has a meal at a restaurant.", "explanation": "Dalla Wordlist Weather: 'diner' = cliente al ristorante.", "tag": "L005.06 · L017.01"}, {"id": "B-42", "locs": ["L005.07", "L017.02"], "lesson": "Lezione 005", "stem": "What does it mean when we say that 'it’s raining cats and dogs'?", "options": ["It's a silly expression and doesn't mean anything.", "It doesn't mean anything.", "There are a lot of cats and dogs out in the rain.", "It's raining heavily."], "answer": "It's raining heavily.", "explanation": "Idiom meteo: piove a dirotto / molto forte.", "tag": "L005.07 · L017.02"}, {"id": "B-43", "locs": ["L005.09", "L016.01"], "lesson": "Lezione 005", "stem": "A: Shall we have a barbecue next Saturday? B: I don't think so. I heard the weather forecast today and they said that it _____.", "options": ["is going to rain", "is raining", "will go rain", "rains"], "answer": "is going to rain", "explanation": "Previsione basata su evidenza (previsioni meteo) -> 'be going to'.", "tag": "L005.09 · L016.01"}, {"id": "B-44", "locs": ["L005.10", "L016.02"], "lesson": "Lezione 005", "stem": "Mid term exams are not as difficult as the final ones, _____?", "options": ["are they", "aren't they", "they are", "they aren't"], "answer": "are they", "explanation": "Question tag: principale negativa -> tag positiva ('are they?').", "tag": "L005.10 · L016.02"}, {"id": "B-45", "locs": ["L005.11", "L015.03"], "lesson": "Lezione 005", "stem": "I can't go to my friend's party because I _____ to Scotland.", "options": ["travelling", "can travel", "am travelling", "travel"], "answer": "am travelling", "explanation": "Present Continuous per programma futuro già fissato.", "tag": "L005.11 · L015.03"}, {"id": "B-46", "locs": ["L005.12", "L015.01"], "lesson": "Lezione 005", "stem": "_____ with rain. Let's close the windows.", "options": ["It's pouring", "It is pour", "It has pour", "It pours"], "answer": "It's pouring", "explanation": "Espressione meteo: 'It's pouring with rain' = sta diluviando.", "tag": "L005.12 · L015.01"}, {"id": "B-47", "locs": ["L005.13", "L015.02"], "lesson": "Lezione 005", "stem": "They're going home tomorrow, _____?", "options": ["they aren't", "they are", "aren't they", "are they"], "answer": "aren't they", "explanation": "Question tag: principale affermativa -> tag negativa ('aren't they?').", "tag": "L005.13 · L015.02"}, {"id": "B-48", "locs": ["L005.14", "L014.01"], "lesson": "Lezione 005", "stem": "Don't worry about your brother, he _____ fine. He's always wanted to go live abroad.", "options": ["will be", "will being", "will is", "will have"], "answer": "will be", "explanation": "Previsione/rassicurazione -> 'will be'.", "tag": "L005.14 · L014.01"}, {"id": "B-49", "locs": ["L005.15", "L014.02"], "lesson": "Lezione 005", "stem": "You can trust me: I _____ a soul.", "options": ["won't to tell", "won't told", "won't tell", "won't say"], "answer": "won't tell", "explanation": "'Not tell a soul' = non dirlo a nessuno.", "tag": "L005.15 · L014.02"}, {"id": "B-50", "locs": ["L005.16", "L014.03"], "lesson": "Lezione 005", "stem": "The exam _____ next Saturday.", "options": ["will being", "is be", "is being", "will be"], "answer": "will be", "explanation": "Evento futuro con verbo stativo 'be': 'will be' (non 'is being').", "tag": "L005.16 · L014.03"}, {"id": "B-51", "locs": ["L006.01", "L018.01"], "lesson": "Lezione 006", "stem": "I realized that I _____ my schoolbag on the bus only when I got to school.", "options": ["forgot", "had forgotten", "forgotten", "have forgotten"], "answer": "had forgotten", "explanation": "Past Perfect per azione precedente a 'realized/got'.", "tag": "L006.01 · L018.01"}, {"id": "B-52", "locs": ["L006.02", "L018.03"], "lesson": "Lezione 006", "stem": "The train _____ when we got to the station.", "options": ["left", "had just left", "had leave", "has just left"], "answer": "had just left", "explanation": "Past Perfect con 'just': era appena partito prima del nostro arrivo.", "tag": "L006.02 · L018.03"}, {"id": "B-53", "locs": ["L006.03", "L021.01"], "lesson": "Lezione 006", "stem": "You shouldn't eat _____ cream and cheese: they're _____.", "options": ["many of / fattening", "much / fattening", "much / fats", "many / fats"], "answer": "much / fattening", "explanation": "'Cream/cheese' uncountable -> 'much'; serve l'aggettivo 'fattening'.", "tag": "L006.03 · L021.01"}, {"id": "B-54", "locs": ["L006.04", "L021.04"], "lesson": "Lezione 006", "stem": "I drink coffee everyday: I think I'm addicted to it. I should cut down on eating ready-prepared food, but I hardly have the time to prepare it. My husband and I both work until late hours, so it's convenient for us. We put it in the microwave and voilà: dinner is served in no time at all. What does 'cut down on' mean?", "options": ["To get rid of something.", "To use it in pieces.", "To use less of something.", "To get it cut into slices."], "answer": "To use less of something.", "explanation": "'Cut down on' = ridurre il consumo / usare meno di qualcosa.", "tag": "L006.04 · L021.04"}, {"id": "B-55", "locs": ["L006.05", "L021.02"], "lesson": "Lezione 006", "stem": "How to get the very first vitamins of the day? By drinking a glass of freshly-squeezed orange juice. What is the meaning of 'freshly-squeezed orange juice'?", "options": ["It's juice that has been pressed out of a frozen fuit (oranges).", "It's frozen juice that has been pressed out of a fresh fruit (oranges).", "It's juice that has been recently pressed out of a fresh fruit (oranges).", "It's juice (oranges) that is fresh from the fridge."], "answer": "It's juice that has been recently pressed out of a fresh fruit (oranges).", "explanation": "'Freshly-squeezed' = spremuta fresca fatta al momento.", "tag": "L006.05 · L021.02"}, {"id": "B-56", "locs": ["L006.06", "L019.01"], "lesson": "Lezione 006", "stem": "We have _____ time: hurry up!", "options": ["much", "few", "not", "little"], "answer": "little", "explanation": "'Time' uncountable + quantità insufficiente -> 'little'.", "tag": "L006.06 · L019.01"}, {"id": "B-57", "locs": ["L006.07", "L019.03"], "lesson": "Lezione 006", "stem": "I'm coming down with the flu: could you give me _____?", "options": ["some advives", "a piece advice", "an adivce", "some advice"], "answer": "some advice", "explanation": "'Advice' è uncountable (mai 'an advice' o 'advices').", "tag": "L006.07 · L019.03"}, {"id": "B-58", "locs": ["L006.08", "L019.02"], "lesson": "Lezione 006", "stem": "When I came back home I realized that I _____ the windows open all day.", "options": ["have left", "had left", "did leave", "left"], "answer": "had left", "explanation": "Past Perfect per azione anteriore al rientro.", "tag": "L006.08 · L019.02"}, {"id": "B-59", "locs": ["L006.09", "L020.02"], "lesson": "Lezione 006", "stem": "I was watching a movie in German but didn't catch _____ of what they were saying. Perhaps only the most common phrases!", "options": ["lots of", "many", "any", "much"], "answer": "much", "explanation": "Concetto uncountable in frase negativa ('didn't catch much'; non 'any' perché ha capito almeno le frasi comuni).", "tag": "L006.09 · L020.02"}, {"id": "B-60", "locs": ["L006.10", "L020.01"], "lesson": "Lezione 006", "stem": "I _____ back from the supermarket when I remembered that I _____ any wine for dinner.", "options": ["had only come / hadn't bought", "had just come / didn't buy", "have just come / hadn't bought", "had just come / hadn't bought"], "answer": "had just come / hadn't bought", "explanation": "Entrambe le azioni sono anteriori a 'remembered' -> Past Perfect.", "tag": "L006.10 · L020.01"}, {"id": "B-61", "locs": ["L006.13"], "lesson": "Lezione 006", "stem": "While I _____ the train I realized I _____ the wrong bag with me.", "options": ["was getting / took", "got on / was taking", "was getting on / was taking", "was getting on / took"], "answer": "was getting on / took", "explanation": "'While' + Past Continuous ('was getting on') + Past Simple ('took').", "tag": "L006.13"}, {"id": "B-62", "locs": ["L006.15", "L021.03"], "lesson": "Lezione 006", "stem": "What is the meaning of this sentence: Stefy was disappointed with the people working at the tourist office because they gave her little information?", "options": ["Stefy didn't give enough information.", "Stefy couldn't give enough information because she didn't work at the tourist office.", "Stefy was expecting more information than what she actually got.", "The people waiting at the tourist office received less than expected."], "answer": "Stefy was expecting more information than what she actually got.", "explanation": "'Little information' (senza 'a') ha senso negativo: meno del necessario.", "tag": "L006.15 · L021.03"}, {"id": "B-63", "locs": ["L020.03"], "lesson": "Lezione 020", "stem": "I couldn't get _____ done yesterday. I had _____ time to do my homework.", "options": ["much / much", "many / much", "much / little", "many / little"], "answer": "much / little", "explanation": "'Much' e 'little' con concetti non numerabili ('work', 'time').", "tag": "L020.03"}, {"id": "B-64", "locs": ["L022.01"], "lesson": "Lezione 022", "stem": "You _____ any weight unless you _____ some regular exercises.", "options": ["will lose any / do", "won't lose / will do", "won't lose / do", "will lose some / do"], "answer": "won't lose / do", "explanation": "First Conditional con 'unless': futura negativa + presente affermativo.", "tag": "L022.01"}, {"id": "B-65", "locs": ["L022.02"], "lesson": "Lezione 022", "stem": "When I come back from my holidays _____much more relaxed.", "options": ["I'll feel", "I feel", "I'll feel like", "I'll like"], "answer": "I'll feel", "explanation": "Temporale con 'When' + Present Simple -> principale con 'will'.", "tag": "L022.02"}, {"id": "B-66", "locs": ["L022.03"], "lesson": "Lezione 022", "stem": "I studied hard in these last months _____ I passed the Maths exam.", "options": ["if", "since", "so", "because"], "answer": "so", "explanation": "Connettivo consecutivo 'so' (quindi).", "tag": "L022.03"}, {"id": "B-67", "locs": ["L022.04"], "lesson": "Lezione 022", "stem": "They built new facilities for children in the area. New facilities _____ for children in the area.", "options": ["are being built", "are built", "were built", "were being built"], "answer": "were built", "explanation": "Passivo del Past Simple con soggetto plurale -> 'were built'.", "tag": "L022.04"}, {"id": "B-68", "locs": ["L023.01"], "lesson": "Lezione 023", "stem": "They hadn't told the referee that the game was put off. The referee _____ that the game was put off.", "options": ["wasn't been told", "hadn't been told", "wasn't told", "hadn't told"], "answer": "hadn't been told", "explanation": "Passivo del Past Perfect negativo -> 'hadn't been told'.", "tag": "L023.01"}, {"id": "B-69", "locs": ["L023.02"], "lesson": "Lezione 023", "stem": "_____ you study, you won't pass final term.", "options": ["If not", "Unless", "Unless you don't", "If"], "answer": "Unless", "explanation": "'Unless' = 'If you don't' (mai doppia negazione dopo 'unless').", "tag": "L023.02"}, {"id": "B-70", "locs": ["L023.03"], "lesson": "Lezione 023", "stem": "Alice _____ to school unless her mom allows her to wear her new white boots.", "options": ["doesn't want to go", "will be", "will go", "won't go"], "answer": "won't go", "explanation": "First Conditional con 'unless': futura negativa + presente affermativo.", "tag": "L023.03"}, {"id": "B-71", "locs": ["L023.04"], "lesson": "Lezione 023", "stem": "I met Casia yesterday at the mall and asked her if she _____ to the party.", "options": ["was coming", "came", "comes", "coming"], "answer": "was coming", "explanation": "Reported question dopo 'asked': slittamento al Past Continuous.", "tag": "L023.04"}, {"id": "B-72", "locs": ["L024.01"], "lesson": "Lezione 024", "stem": "If you heat ice, it _____ .", "options": ["would melt", "is melting", "melts", "will melt"], "answer": "melts", "explanation": "Zero Conditional (legge fisica sempre valida): Present Simple + Present Simple.", "tag": "L024.01"}, {"id": "B-73", "locs": ["L024.02"], "lesson": "Lezione 024", "stem": "Although she _____ very well, Rose won the match in three sets.", "options": ["wasn't playing", "isn't playing", "doesn't play", "didn't play"], "answer": "didn't play", "explanation": "Concessiva al passato coordinata con 'won' (Sports 5.4).", "tag": "L024.02"}, {"id": "B-74", "locs": ["L024.03"], "lesson": "Lezione 024", "stem": "A typical morning workout consists of a 12-kilometer paddle, a 10k run, and weight training. What is the meaning of 'workout'?", "options": ["/", "A period of apprenticeship.", "A period of physical exercise.", "A period of work in a gym."], "answer": "A period of physical exercise.", "explanation": "'Workout' = sessione di esercizio fisico.", "tag": "L024.03"}, {"id": "B-75", "locs": ["L024.04"], "lesson": "Lezione 024", "stem": "Unusual news: This news is about a stunt. Two wingsuit flyers do the stunt. They jump from a mountain in Switzerland. A plane flies around the mountain. Its door is open. The two men fly into the plane. What is a 'wingsuit flyer'?", "options": ["A wingsuit flyer flies being pulled by an aircraft.", "A wingsuit flyer is a person who puts on particular wings and flies.", "A wingsuit flyer is a person who launches from a veicle and falls onto the ground using a parachute.", "A wingsuit flyer is a person who 'flies' wearing a particular suit made of nylon."], "answer": "A wingsuit flyer is a person who 'flies' wearing a particular suit made of nylon.", "explanation": "Chi plana con una speciale tuta alare in nylon.", "tag": "L024.04"}, {"id": "B-76", "locs": ["L024.05"], "lesson": "Lezione 024", "stem": "Liverpool managed to _____ Manchester in the last minute of the match.", "options": ["beat", "beating", "win", "winning"], "answer": "beat", "explanation": "'Beat' + squadra/avversario; 'win' + partita/trofeo.", "tag": "L024.05"}], "open": [{"id": "B-OP-01", "tag": "L002.18 · L003.16", "module": "Environment", "prompt": "Do you think cars should be banned from the city centres? Why? / Why not?", "model": "In my opinion, private cars should be restricted from city centres, although not completely banned for residents or emergency services. Reducing traffic congestion lowers harmful emissions and air pollution, making historic centres safer and cleaner for pedestrians and cyclists. However, municipalities must invest in reliable public transport first.", "keywords": "banned, traffic congestion, emissions, public transport, pedestrian zones"}, {"id": "B-OP-02", "tag": "L002.19 · L004.20", "module": "Environment", "prompt": "What else can we do to protect the environment and improve our life on earth?", "model": "Beyond reducing car emissions, we can cut down on single-use plastics and sort household waste carefully so less rubbish ends up in landfills. Saving energy at home and switching to renewable sources like solar power also preserves natural resources and reduces pollution.", "keywords": "cut down on, landfill, recycle, renewable energy, preserve biodiversity"}, {"id": "B-OP-03", "tag": "L002.20 · L005.17", "module": "Environment", "prompt": "In your opinion, is it possible to avoid environmental disasters?", "model": "While we cannot avoid every natural disaster like earthquakes, we can greatly reduce their frequency and severity. By stopping deforestation, enforcing strict laws against illegal dumping and poaching, and using sensor networks to detect wildfires early, governments can prevent man-made environmental disasters.", "keywords": "predicted, wildfire, drought, threaten, prevent damage"}, {"id": "B-OP-04", "tag": "L002.21 · L002.22", "module": "Environment", "prompt": "What is the biggest problem our planet has today?", "model": "In my view, climate change and global warming represent the biggest threat to our planet today. Rising temperatures caused by greenhouse gas emissions lead to extreme weather, melting glaciers, and severe droughts that endanger both biodiversity and human food supplies.", "keywords": "global warming, climate change, emit, greenhouse gases, biodiversity"}, {"id": "B-OP-05", "tag": "L003.17 · L009.05", "module": "Holidays", "prompt": "Have you ever been on a cruise? Would you like to? Why? / Why not?", "model": "No, I have never been on a cruise, and I am not very keen on trying one. Although full-board accommodation and organised excursions sound convenient, cruise ships feel too crowded and leave little time to explore each place authentically. I prefer independent trips.", "keywords": "accommodation, excursion, full-board, delayed, staycation"}, {"id": "B-OP-06", "tag": "L003.18 · L008.04", "module": "Holidays", "prompt": "What do you usually like doing when you are on holiday?", "model": "When I am on holiday, I like balancing relaxation and exploration. I enjoy visiting museums, walking through historic streets, and admiring stunning landscapes without rushing. I also love tasting local cuisine and browsing markets to pick up authentic souvenirs.", "keywords": "manage time, browse, sightseeing, stunning landscapes, local cuisine"}, {"id": "B-OP-07", "tag": "L003.19 · L007.04", "module": "Holidays", "prompt": "What is the longest holiday you have ever had?", "model": "The longest holiday I have ever had lasted three weeks during the summer after high school. I travelled with friends around southern Italy, staying in simple half-board accommodation near the coast. Even though our train was delayed on the first day, the daily excursions were unforgettable.", "keywords": "accommodation, excursion, come across, delayed, stunning"}, {"id": "B-OP-08", "tag": "L003.20 · L006.20", "module": "Holidays", "prompt": "What time of year do you prefer to go on holiday?", "model": "I prefer going on holiday in late spring or early autumn, such as June or September. The weather is warm and pleasant without being boiling hot, tourist spots are less crowded, and flights and accommodation are cheaper so you don't get ripped off.", "keywords": "pleasant weather, crowded, accommodation, ripped off, bargain"}, {"id": "B-OP-09", "tag": "L004.16 · L010.04", "module": "Shopping", "prompt": "Do you usually buy only what you need when you go shopping or do you end up buying unnecessary things?", "model": "Most of the time I am a methodical shopper: I prepare a list and compare prices so I don't waste money. Occasionally, when I browse bookshops or electronics and find a great bargain, I make a small impulse purchase, while avoiding throwing money down the drain.", "keywords": "methodical shopper, impulse shopper, browse, bargain, down the drain"}, {"id": "B-OP-10", "tag": "L004.17 · L011.04", "module": "Shopping", "prompt": "What is something that you would like to buy but never will?", "model": "I would love to buy a classic Italian sports car or a custom home server lab, because of my passion for engineering. However, these items are unaffordable and cost an arm and a leg to buy and maintain. Unless I become loaded, I prefer spending money on travel.", "keywords": "cost an arm and a leg, unaffordable, loaded, purchase, luxury"}, {"id": "B-OP-11", "tag": "L004.18 · L012.04", "module": "Shopping", "prompt": "How do you feel about shopping in malls or department stores?", "model": "I have mixed feelings about shopping malls. Brick-and-mortar department stores are convenient when you need many items under one roof, especially on rainy days. However, I find them noisy and crowded, with long queues at the till, so I prefer small shops or online browsing.", "keywords": "brick and mortar, crowded, deal, browse, till"}, {"id": "B-OP-12", "tag": "L004.19 · L013.04", "module": "Shopping", "prompt": "Do you ever buy clothes on line? Why? /Why not?", "model": "Yes, I sometimes buy basic clothes like T-shirts or trainers online because it is fast and easy to compare deals. However, for trousers or jackets I prefer brick-and-mortar stores, because I like checking the fabric quality and trying items on before paying.", "keywords": "try on, bargain, purchase, brick and mortar, deal"}, {"id": "B-OP-13", "tag": "L005.18 · L014.04", "module": "Weather", "prompt": "Which season do you like best? Why?", "model": "My favourite season is autumn, especially September and October. After the boiling heatwaves of summer, the air becomes crisp and mild, which boosts my focus for studying. I love the warm autumn colours and chilly evenings without muggy weather.", "keywords": "mild, chilly, overcast, heatwave, boost mood"}, {"id": "B-OP-14", "tag": "L005.19 · L015.04", "module": "Weather", "prompt": "What activities do you prefer doing when the weather is hot?", "model": "When the weather is sizzling hot, I avoid heavy activity at midday. Instead, I prefer going to the seaside or a shaded mountain trail early in the morning or late afternoon where there is a breeze, and meeting friends outdoors in the evening.", "keywords": "sizzling, heatwave, muggy, stay hydrated, breeze"}, {"id": "B-OP-15", "tag": "L005.20 · L016.04", "module": "Weather", "prompt": "Do you watch or read the weather forecast? Why? /Why not?", "model": "Yes, I check the weather forecast every morning on my phone, especially before commuting or planning weekend trips. Knowing if it will be sunny, drizzling, or pouring with rain helps me dress properly and avoid sudden gales or storms.", "keywords": "pouring, gale, drizzling, excursion, forecast"}, {"id": "B-OP-16", "tag": "L005.21 · L017.04", "module": "Weather", "prompt": "How does the weather affect how you feel?", "model": "Weather strongly affects my mood and energy. Sunny days boost my motivation—probably because sunlight raises serotonin levels. Conversely, several overcast, foggy, or gloomy rainy days in a row can dampen my enthusiasm, though a rainy afternoon can feel cosy indoors.", "keywords": "gloomy, overcast, serotonin, boost, dampen"}, {"id": "B-OP-17", "tag": "L006.16 · L019.04", "module": "Food", "prompt": "Many say that young people eat unhealthily. What is your opinion? Why?", "model": "I think that statement is largely true. Busy schedules push many young people to rely on ready-prepared food, snacks, and sugary soft drinks instead of cooking fresh meals. Fast food offers poor nourishment and too much fat, so cutting down on processed food is essential.", "keywords": "balanced diet, cut down on, soft drinks, fattening, nourishment"}, {"id": "B-OP-18", "tag": "L006.17 · L018.04", "module": "Food", "prompt": "Which is your favourite meal of the day?", "model": "Dinner is my favourite meal of the day. In the morning I am usually in a rush and just brew coffee with a light breakfast, whereas in the evening I can relax and enjoy a proper home-cooked meal with family or friends, slowing down to talk about our day.", "keywords": "freshly-squeezed, loaf, nourishment, balanced, brew"}, {"id": "B-OP-19", "tag": "L006.18 · L020.04", "module": "Food", "prompt": "What is your favourite type of restaurant? Why?", "model": "My favourite type of restaurant is a traditional Italian trattoria or a local pizzeria. Unlike fast-food chains, family-run places use fresh seasonal ingredients and make dishes like pasta, bread dough, and slow-cooked stews from scratch in a welcoming atmosphere.", "keywords": "diners, local cuisine, stew, dough, generous portions"}, {"id": "B-OP-20", "tag": "L006.19 · L021.05", "module": "Food", "prompt": "Do you cook? If not, would you like to learn? Why?/ Why not?", "model": "Yes, I enjoy cooking simple, healthy dishes during the week. Cooking is a vital life skill: it saves money, lets you control ingredients, and helps you cut down on salty ready-made meals. I would love to learn more traditional recipes to keep a balanced diet.", "keywords": "cookery, utensils, cut down on, ingredients, balanced"}, {"id": "B-OP-21", "tag": "L022.05", "module": "Sports", "prompt": "Many sports are team sports. Which one do you prefer: individual or team sports? Why?", "model": "I generally prefer individual sports such as running, cycling, or gym workouts, because they fit easily around my university schedule and teach self-discipline. Still, I admire team sports like football and basketball for teaching cooperation and team spirit.", "keywords": "workout, beat, flexible schedule, teamwork, motivation"}, {"id": "B-OP-22", "tag": "L023.05", "module": "Sports", "prompt": "Are there any sports you prefer to watch rather than play? Why?", "model": "Yes, I enjoy watching motorsports and extreme sports like wingsuit flying or ski jumping, which I would never practise myself. They are thrilling to watch for the speed and skill involved, yet the risk of getting severely injured is far too high.", "keywords": "extreme sports, wingsuit flyer, injured, thrilling, spectator"}, {"id": "B-OP-23", "tag": "L024.06", "module": "Sports", "prompt": "Do you think that schools should increase the time devoted to sports? Why? / Why not?", "model": "Yes, schools should definitely increase hours devoted to physical education. Students spend too much time sitting in front of screens, which hurts fitness and raises stress. Regular workouts improve health, build team spirit, and sharpen concentration in academic subjects.", "keywords": "workout, unhealthy lifestyle, balanced, focus, team spirit"}, {"id": "B-OP-24", "tag": "L024.07", "module": "Sports", "prompt": "Some traditional sports involve animals, such as horse racing or rodeos, where animals get hurt or severely injured. Should these sports be banned? Why? / Why not?", "model": "In my opinion, any sport or spectacle that causes animals to be hurt or severely injured for entertainment should be banned. Cultural traditions should never justify animal cruelty; we can preserve heritage through safe events with strict animal-welfare standards.", "keywords": "severely injured, cruel, endangered, ethical, entertainment"}]}};
+
+const STORAGE_KEY = "marco_inglese_tutor_v1";
+let state = loadState();
+let currentCourse = "A";
+let currentMode = "drill";
+let drillList = [];
+let drillIdx = 0;
+let drillAnswered = false;
+let shuffleOn = false;
+
+let examSession = null;
+let examTimerId = null;
+
+function defaultState() {
+  return {
+    A: { seen: {}, wrong: [], bookmarks: [] },
+    B: { seen: {}, wrong: [], bookmarks: [] }
+  };
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return defaultState();
+    const p = JSON.parse(raw);
+    if (!p.A || !p.B) return defaultState();
+    return p;
+  } catch { return defaultState(); }
+}
+
+function saveState() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch {}
+}
+
+function updateCountdown() {
+  const examDate = new Date("2026-12-01T09:30:00");
+  const now = new Date();
+  const diffDays = Math.ceil((examDate - now) / (1000 * 60 * 60 * 24));
+  const pill = document.getElementById("countdown-pill");
+  if (diffDays > 0) pill.textContent = `Esame 01/12 · -${diffDays} giorni`;
+  else if (diffDays === 0) pill.textContent = "Esame OGGI 01/12";
+  else pill.textContent = "Esame 01/12/2026";
+}
+
+function switchCourse(c) {
+  currentCourse = c;
+  document.getElementById("btn-course-A").setAttribute("aria-pressed", c === "A");
+  document.getElementById("btn-course-B").setAttribute("aria-pressed", c === "B");
+  populateLessonFilter();
+  applyDrillFilter();
+  populateOpenFilter();
+  renderOpenList();
+  renderReviewList();
+  resetExamView();
+  updateStats();
+}
+
+function switchMode(m) {
+  currentMode = m;
+  ["drill", "exam", "open", "review"].forEach(id => {
+    document.getElementById("tab-" + id).setAttribute("aria-selected", id === m);
+    document.getElementById("panel-" + id).classList.toggle("hidden", id !== m);
+  });
+  if (m === "review") renderReviewList();
+}
+
+function updateStats() {
+  const bank = DB[currentCourse].closed;
+  const st = state[currentCourse];
+  const seenIds = Object.keys(st.seen);
+  const correctCount = seenIds.filter(id => st.seen[id] === true).length;
+  document.getElementById("stat-bank").textContent = `${bank.length} chiuse · ${DB[currentCourse].open.length} aperte`;
+  document.getElementById("stat-done").textContent = `${seenIds.length} / ${bank.length}`;
+  document.getElementById("stat-acc").textContent = seenIds.length ? `${Math.round((correctCount / seenIds.length) * 100)}%` : "—";
+  const revSet = new Set([...st.wrong, ...st.bookmarks]);
+  document.getElementById("stat-review").textContent = `${revSet.size}`;
+}
+
+/* ---------- DRILL ---------- */
+function populateLessonFilter() {
+  const sel = document.getElementById("filter-lesson");
+  const lessons = [...new Set(DB[currentCourse].closed.map(q => q.lesson))];
+  sel.innerHTML = `<option value="ALL">Tutte le lezioni (${DB[currentCourse].closed.length})</option>` +
+    lessons.map(l => `<option value="${l}">${l}</option>`).join("");
+}
+
+function applyDrillFilter() {
+  const val = document.getElementById("filter-lesson").value;
+  let list = DB[currentCourse].closed.filter(q => val === "ALL" || q.lesson === val);
+  if (shuffleOn) {
+    list = [...list].sort(() => Math.random() - 0.5);
+  }
+  drillList = list;
+  drillIdx = 0;
+  renderDrillCard();
+}
+
+function toggleShuffle() {
+  shuffleOn = !shuffleOn;
+  document.getElementById("btn-shuffle").setAttribute("aria-pressed", shuffleOn);
+  applyDrillFilter();
+}
+
+function renderDrillCard() {
+  if (!drillList.length) return;
+  const q = drillList[drillIdx];
+  drillAnswered = false;
+  document.getElementById("drill-counter").textContent = `${drillIdx + 1} / ${drillList.length}`;
+  document.getElementById("drill-progress").style.width = `${((drillIdx + 1) / drillList.length) * 100}%`;
+  document.getElementById("drill-tag").textContent = q.tag;
+  document.getElementById("drill-stem").textContent = q.stem;
+
+  const isSaved = state[currentCourse].bookmarks.includes(q.id);
+  const bmBtn = document.getElementById("btn-bookmark");
+  bmBtn.setAttribute("aria-pressed", isSaved);
+  bmBtn.textContent = isSaved ? "Salvata" : "Salva";
+
+  const fb = document.getElementById("drill-feedback");
+  fb.className = "feedback-box hidden";
+  fb.innerHTML = "";
+
+  const optsEl = document.getElementById("drill-options");
+  optsEl.innerHTML = "";
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement("button");
+    btn.className = "opt-btn";
+    btn.innerHTML = `<kbd>${i + 1}</kbd><span>${escapeHtml(opt)}</span>`;
+    btn.onclick = () => answerDrill(i);
+    optsEl.appendChild(btn);
+  });
+}
+
+function answerDrill(idx) {
+  if (drillAnswered) return;
+  drillAnswered = true;
+  const q = drillList[drillIdx];
+  const chosen = q.options[idx];
+  const isOk = chosen === q.answer;
+
+  const buttons = document.querySelectorAll("#drill-options .opt-btn");
+  buttons.forEach((b, i) => {
+    b.disabled = true;
+    if (q.options[i] === q.answer) b.classList.add("correct");
+    else if (i === idx && !isOk) b.classList.add("wrong");
+  });
+
+  const st = state[currentCourse];
+  st.seen[q.id] = isOk;
+  if (!isOk && !st.wrong.includes(q.id)) st.wrong.push(q.id);
+  if (isOk) st.wrong = st.wrong.filter(id => id !== q.id);
+  saveState();
+  updateStats();
+
+  const fb = document.getElementById("drill-feedback");
+  fb.className = "feedback-box " + (isOk ? "ok" : "ko");
+  fb.innerHTML = `<strong>${isOk ? "Corretto." : "Risposta errata."}</strong> ${escapeHtml(q.explanation)}`;
+}
+
+function nextDrill() {
+  if (drillIdx < drillList.length - 1) { drillIdx++; renderDrillCard(); }
+  else { drillIdx = 0; renderDrillCard(); }
+}
+
+function prevDrill() {
+  if (drillIdx > 0) { drillIdx--; renderDrillCard(); }
+}
+
+function toggleBookmarkCurrent() {
+  const q = drillList[drillIdx];
+  if (!q) return;
+  const arr = state[currentCourse].bookmarks;
+  const i = arr.indexOf(q.id);
+  if (i >= 0) arr.splice(i, 1);
+  else arr.push(q.id);
+  saveState();
+  updateStats();
+  const isSaved = arr.includes(q.id);
+  const bmBtn = document.getElementById("btn-bookmark");
+  bmBtn.setAttribute("aria-pressed", isSaved);
+  bmBtn.textContent = isSaved ? "Salvata" : "Salva";
+}
+
+/* ---------- EXAM SIMULATION ---------- */
+function resetExamView() {
+  stopTimer();
+  examSession = null;
+  document.getElementById("exam-intro").classList.remove("hidden");
+  document.getElementById("exam-active").classList.add("hidden");
+  document.getElementById("exam-results").classList.add("hidden");
+  const c = DB[currentCourse];
+  document.getElementById("exam-desc").textContent =
+    currentCourse === "A"
+      ? "Estrae casualmente 24 domande chiuse e 2 domande aperte dal Set Domande DM 1648/23. Tempo: 40 minuti."
+      : "Estrae casualmente 23 domande chiuse e 2 domande aperte dai 6 moduli di Inglese B (punteggio max scritto 27/30 + orale). Tempo: 40 minuti.";
+}
+
+function startExam() {
+  const c = DB[currentCourse];
+  const closedPick = [...c.closed].sort(() => Math.random() - 0.5).slice(0, c.examSize);
+  const openPick = [...c.open].sort(() => Math.random() - 0.5).slice(0, 2);
+  examSession = {
+    closed: closedPick,
+    open: openPick,
+    answers: new Array(closedPick.length).fill(null),
+    openText: ["", ""],
+    curIndex: 0,
+    secondsLeft: 40 * 60,
+    paused: false,
+    submitted: false
+  };
+  document.getElementById("exam-intro").classList.add("hidden");
+  document.getElementById("exam-results").classList.add("hidden");
+  document.getElementById("exam-active").classList.remove("hidden");
+  document.getElementById("exam-badge").textContent = c.name;
+  renderExamNav();
+  renderExamStage();
+  startTimer();
+}
+
+function startTimer() {
+  stopTimer();
+  examTimerId = setInterval(() => {
+    if (!examSession || examSession.paused || examSession.submitted) return;
+    examSession.secondsLeft--;
+    updateTimerDisplay();
+    if (examSession.secondsLeft <= 0) submitExam();
+  }, 1000);
+  updateTimerDisplay();
+}
+
+function stopTimer() {
+  if (examTimerId) { clearInterval(examTimerId); examTimerId = null; }
+}
+
+function toggleTimer() {
+  if (!examSession) return;
+  examSession.paused = !examSession.paused;
+  document.getElementById("btn-pause-timer").textContent = examSession.paused ? "Riprendi" : "Pausa";
+}
+
+function updateTimerDisplay() {
+  const s = Math.max(0, examSession.secondsLeft);
+  const m = String(Math.floor(s / 60)).padStart(2, "0");
+  const r = String(s % 60).padStart(2, "0");
+  document.getElementById("exam-timer").textContent = `${m}:${r}`;
+}
+
+function renderExamNav() {
+  const nav = document.getElementById("exam-nav");
+  const totalClosed = examSession.closed.length;
+  let html = "";
+  for (let i = 0; i < totalClosed; i++) {
+    const cls = ["num-chip"];
+    if (examSession.answers[i] !== null) cls.push("answered");
+    if (examSession.curIndex === i) cls.push("active");
+    html += `<button class="${cls.join(" ")}" onclick="jumpExam(${i})">${i + 1}</button>`;
+  }
+  for (let j = 0; j < 2; j++) {
+    const idx = totalClosed + j;
+    const cls = ["num-chip"];
+    if (examSession.openText[j].trim().length > 0) cls.push("answered");
+    if (examSession.curIndex === idx) cls.push("active");
+    html += `<button class="${cls.join(" ")}" onclick="jumpExam(${idx})">A${j + 1}</button>`;
+  }
+  nav.innerHTML = html;
+}
+
+function jumpExam(idx) {
+  examSession.curIndex = idx;
+  renderExamNav();
+  renderExamStage();
+}
+
+function examStep(delta) {
+  const maxIdx = examSession.closed.length + 1;
+  const next = examSession.curIndex + delta;
+  if (next >= 0 && next <= maxIdx) jumpExam(next);
+}
+
+function renderExamStage() {
+  const stage = document.getElementById("exam-stage");
+  const totalClosed = examSession.closed.length;
+  const idx = examSession.curIndex;
+
+  if (idx < totalClosed) {
+    const q = examSession.closed[idx];
+    const chosen = examSession.answers[idx];
+    stage.innerHTML = `
+      <div class="q-meta"><span class="pill pill-blue">Domanda ${idx + 1} di ${totalClosed}</span><span class="q-tag">${escapeHtml(q.tag)}</span></div>
+      <h3 class="q-stem">${escapeHtml(q.stem)}</h3>
+      <div class="options-list">
+        ${q.options.map((opt, oi) => `
+          <button class="opt-btn ${chosen === oi ? "selected" : ""}" onclick="pickExamOption(${idx}, ${oi})">
+            <kbd>${oi + 1}</kbd><span>${escapeHtml(opt)}</span>
+          </button>
+        `).join("")}
+      </div>
+    `;
+  } else {
+    const oIdx = idx - totalClosed;
+    const oq = examSession.open[oIdx];
+    stage.innerHTML = `
+      <div class="q-meta"><span class="pill pill-yellow">Domanda Aperta ${oIdx + 1} di 2</span><span class="q-tag">${escapeHtml(oq.tag)} · ${escapeHtml(oq.module)}</span></div>
+      <div class="open-prompt">${escapeHtml(oq.prompt)}</div>
+      <textarea placeholder="Scrivi qui la tua risposta in inglese (o i completamenti richiesti)..." oninput="saveExamOpen(${oIdx}, this.value)">${escapeHtml(examSession.openText[oIdx])}</textarea>
+    `;
+  }
+}
+
+function pickExamOption(qIdx, optIdx) {
+  examSession.answers[qIdx] = optIdx;
+  renderExamNav();
+  renderExamStage();
+}
+
+function saveExamOpen(oIdx, val) {
+  examSession.openText[oIdx] = val;
+  renderExamNav();
+}
+
+function submitExam() {
+  stopTimer();
+  examSession.submitted = true;
+  document.getElementById("exam-active").classList.add("hidden");
+  const resEl = document.getElementById("exam-results");
+  resEl.classList.remove("hidden");
+
+  let score = 0;
+  const wrongs = [];
+  examSession.closed.forEach((q, i) => {
+    const pickIdx = examSession.answers[i];
+    const pickText = pickIdx !== null ? q.options[pickIdx] : "(Nessuna risposta)";
+    const ok = pickText === q.answer;
+    if (ok) score++;
+    else {
+      wrongs.push({ num: i + 1, q, pickText });
+      if (!state[currentCourse].wrong.includes(q.id)) state[currentCourse].wrong.push(q.id);
+    }
+    state[currentCourse].seen[q.id] = ok;
+  });
+  saveState();
+  updateStats();
+
+  const total = examSession.closed.length;
+  const openMax = currentCourse === "B" ? 4 : 6;
+  let html = `
+    <div class="controls-row">
+      <div>
+        <h2 style="font-family:var(--serif);margin:0 0 4px 0;">Risultato Simulazione</h2>
+        <p style="margin:0;color:var(--ink-muted);">Punteggio chiuse: <strong>${score} / ${total}</strong> (+ fino a ${openMax} punti dalle 2 aperte)</p>
+      </div>
+      <button class="btn-primary" onclick="resetExamView()">Nuova Simulazione</button>
+    </div>
+  `;
+
+  if (wrongs.length === 0) {
+    html += `<div class="feedback-box ok"><strong>Perfetto!</strong> Tutte le ${total} domande chiuse sono corrette.</div>`;
+  } else {
+    html += `<h3 style="margin:18px 0 10px 0;">Errori da rivedere (${wrongs.length})</h3>`;
+    wrongs.forEach(w => {
+      html += `
+        <div class="open-item" style="border-color:var(--red-bd);">
+          <div class="q-tag">#${w.num} · ${escapeHtml(w.q.tag)}</div>
+          <div style="font-weight:600;margin:4px 0 8px 0;">${escapeHtml(w.q.stem)}</div>
+          <div style="color:var(--red-fg);font-size:14px;">Tua risposta: ${escapeHtml(w.pickText)}</div>
+          <div style="color:var(--green-fg);font-size:14px;font-weight:600;margin-bottom:6px;">Corretta: ${escapeHtml(w.q.answer)}</div>
+          <div style="font-size:13.5px;color:var(--ink-muted);">${escapeHtml(w.q.explanation)}</div>
+        </div>
+      `;
+    });
+  }
+
+  html += `<h3 style="margin:22px 0 10px 0;">Confronto Domande Aperte</h3>`;
+  examSession.open.forEach((oq, j) => {
+    const userTxt = examSession.openText[j].trim() || "(Non compilata)";
+    html += `
+      <div class="open-item">
+        <div class="q-tag">Aperta ${j + 1} · ${escapeHtml(oq.tag)} · ${escapeHtml(oq.module)}</div>
+        <div class="open-prompt" style="margin-top:6px;">${escapeHtml(oq.prompt)}</div>
+        <div style="font-size:13px;font-weight:600;color:var(--ink-muted);margin-bottom:4px;">La tua risposta:</div>
+        <div style="padding:10px 12px;background:var(--bg);border-radius:6px;margin-bottom:10px;white-space:pre-line;font-size:14.5px;">${escapeHtml(userTxt)}</div>
+        <div style="font-size:13px;font-weight:600;color:var(--blue-fg);margin-bottom:4px;">Modello / Soluzione verificata:</div>
+        <div class="model-box" style="margin-top:0;">${escapeHtml(oq.model)}</div>
+        <div class="kw-bar">${escapeHtml(oq.keywords)}</div>
+      </div>
+    `;
+  });
+
+  resEl.innerHTML = html;
+}
+
+/* ---------- OPEN QUESTIONS & ORAL ---------- */
+function populateOpenFilter() {
+  const sel = document.getElementById("filter-open-mod");
+  const mods = [...new Set(DB[currentCourse].open.map(o => o.module))];
+  sel.innerHTML = `<option value="ALL">Tutte (${DB[currentCourse].open.length})</option>` +
+    mods.map(m => `<option value="${escapeHtml(m)}">${escapeHtml(m)}</option>`).join("");
+}
+
+function renderOpenList() {
+  const val = document.getElementById("filter-open-mod").value;
+  const list = DB[currentCourse].open.filter(o => val === "ALL" || o.module === val);
+  const el = document.getElementById("open-list");
+  el.innerHTML = list.map((o, idx) => `
+    <article class="open-item">
+      <div class="open-head">
+        <span class="pill pill-blue">${escapeHtml(o.module)}</span>
+        <span class="q-tag">${escapeHtml(o.tag)}</span>
+      </div>
+      <div class="open-prompt">${escapeHtml(o.prompt)}</div>
+      <div class="control-group">
+        <button class="btn-secondary" onclick="toggleModel('mod-${o.id}', this)">Mostra Modello</button>
+        <button class="btn-secondary" onclick="speakById('${o.id}')">Ascolta Pronuncia</button>
+      </div>
+      <div id="mod-${o.id}" class="model-box hidden">${escapeHtml(o.model)}<div class="kw-bar">${escapeHtml(o.keywords)}</div></div>
+    </article>
+  `).join("");
+}
+
+function toggleModel(id, btn) {
+  const box = document.getElementById(id);
+  const hidden = box.classList.toggle("hidden");
+  btn.textContent = hidden ? "Mostra Modello" : "Nascondi Modello";
+}
+
+function toggleAllModels(show) {
+  document.querySelectorAll("#open-list .model-box").forEach(b => {
+    b.classList.toggle("hidden", !show);
+  });
+  document.querySelectorAll("#open-list .open-item").forEach(item => {
+    const btn = item.querySelector("button");
+    if (btn) btn.textContent = show ? "Nascondi Modello" : "Mostra Modello";
+  });
+}
+
+function speakById(id) {
+  const item = DB[currentCourse].open.find(o => o.id === id);
+  if (!item || !("speechSynthesis" in window)) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(item.model);
+  u.lang = "en-GB";
+  u.rate = 0.94;
+  window.speechSynthesis.speak(u);
+}
+
+/* ---------- REVIEW & PROGRESS EXPORT ---------- */
+function renderReviewList() {
+  const st = state[currentCourse];
+  const ids = [...new Set([...st.wrong, ...st.bookmarks])];
+  const el = document.getElementById("review-list");
+  if (!ids.length) {
+    el.innerHTML = `<p style="color:var(--ink-muted);margin:12px 0;">Nessun errore o domanda salvata per questo corso.</p>`;
+    return;
+  }
+  const map = Object.fromEntries(DB[currentCourse].closed.map(q => [q.id, q]));
+  el.innerHTML = ids.map(id => {
+    const q = map[id];
+    if (!q) return "";
+    const isErr = st.wrong.includes(id);
+    return `
+      <div class="open-item">
+        <div class="open-head">
+          <span class="pill ${isErr ? "pill-red" : "pill-yellow"}">${isErr ? "Errore" : "Salvata"}</span>
+          <span class="q-tag">${escapeHtml(q.tag)}</span>
+        </div>
+        <div style="font-weight:600;margin-bottom:8px;">${escapeHtml(q.stem)}</div>
+        <div style="color:var(--green-fg);font-weight:600;font-size:14.5px;margin-bottom:4px;">Risposta corretta: ${escapeHtml(q.answer)}</div>
+        <div style="font-size:13.5px;color:var(--ink-muted);margin-bottom:10px;">${escapeHtml(q.explanation)}</div>
+        <button class="btn-secondary" onclick="clearReviewItem('${id}')">Segna come imparata</button>
+      </div>
+    `;
+  }).join("");
+}
+
+function clearReviewItem(id) {
+  const st = state[currentCourse];
+  st.wrong = st.wrong.filter(x => x !== id);
+  st.bookmarks = st.bookmarks.filter(x => x !== id);
+  saveState();
+  updateStats();
+  renderReviewList();
+}
+
+function resetCourseStats() {
+  state[currentCourse] = { seen: {}, wrong: [], bookmarks: [] };
+  saveState();
+  updateStats();
+  renderReviewList();
+}
+
+function exportProgress() {
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "progressi_inglese_marco.json";
+  a.click();
+}
+
+function importProgress(ev) {
+  const file = ev.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const p = JSON.parse(reader.result);
+      if (p.A && p.B) {
+        state = p;
+        saveState();
+        updateStats();
+        renderReviewList();
+      }
+    } catch {}
+  };
+  reader.readAsText(file);
+}
+
+/* ---------- KEYBOARD SHORTCUTS ---------- */
+document.addEventListener("keydown", e => {
+  if (e.target.tagName === "TEXTAREA" || e.target.tagName === "SELECT") return;
+  if (currentMode === "drill") {
+    if (["1", "2", "3", "4"].includes(e.key)) {
+      const idx = parseInt(e.key, 10) - 1;
+      if (drillList[drillIdx] && idx < drillList[drillIdx].options.length) answerDrill(idx);
+    } else if (e.key === "Enter" || e.key === "ArrowRight") {
+      nextDrill();
+    } else if (e.key === "ArrowLeft") {
+      prevDrill();
+    } else if (e.key.toLowerCase() === "b") {
+      toggleBookmarkCurrent();
+    }
+  }
+});
+
+function escapeHtml(str) {
+  return String(str)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+/* INIT */
+updateCountdown();
+switchCourse("A");
+</script>
+</body>
+</html>
