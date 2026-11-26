@@ -597,6 +597,15 @@
         </div>
       </div>
     </div>
+    <div id="oral-info-B" class="card hidden" style="padding:16px 20px;margin-bottom:14px;border-color:#E7D8A5;background:var(--yellow-bg);">
+      <div style="font-weight:600;color:var(--yellow-fg);margin-bottom:6px;">Promemoria Orale Inglese B · L8 (3 CFU) — Prof.ssa Stefania Damonte</div>
+      <div style="font-size:13.5px;line-height:1.5;color:var(--ink);">
+        <strong>Ammissione:</strong> orale obbligatorio solo dopo superamento scritto (<em>Esito 1</em>).<br>
+        <strong>Programma L8:</strong> solo conversazione <em>General English</em> (escluse letture 42–47 per LM).<br>
+        <strong>Finestra date:</strong> 09/12 (9–11:30), 10/12 (11–17), 11/12 (10–16:30), 15/12 (9–13), 17/12 (11–17), 18/12 (9–13), 21/12 (9–16:30), 22/12 (10–13), 11/01 (9–16:30), 12/01 (9–13).<br>
+        <strong>Indisponibilità:</strong> comunicare via Messaggistica entro <strong>lunedì 30 novembre</strong> (refuso &ldquo;30 dicembre&rdquo; nella mail).
+      </div>
+    </div>
     <div id="open-list"></div>
   </section>
 
@@ -681,6 +690,7 @@ function switchCourse(c) {
   currentCourse = c;
   document.getElementById("btn-course-A").setAttribute("aria-pressed", c === "A");
   document.getElementById("btn-course-B").setAttribute("aria-pressed", c === "B");
+  document.getElementById("oral-info-B").classList.toggle("hidden", c !== "B");
   populateLessonFilter();
   applyDrillFilter();
   populateOpenFilter();
